@@ -1,5 +1,5 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'org.springframework.boot' version '2.3.0.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
 }
@@ -8,17 +8,44 @@ group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    implementation 'javax.servlet:jstl'
+    compileOnly 'org.projectlombok:lombok'
+    compile group: 'javax.inject', name: 'javax.inject', version: '1'
+    runtimeOnly 'mysql:mysql-connector-java'
+    annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+
+    // MyBatis
+    compile("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.0")
+    compile("org.mybatis:mybatis-spring")
+    compile("org.mybatis:mybatis")
+
+    //JDBC
+    compile('org.springframework.boot:spring-boot-starter-jdbc')
+    compile('mysql:mysql-connector-java')
+
+    //JSON(JavaScript Object Notation)
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
+    //GSON
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
 }
 
 test {
     useJUnitPlatform()
 }
+
