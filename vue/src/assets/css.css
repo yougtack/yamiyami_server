@@ -1,0 +1,170 @@
+/* 초기화 */
+a {
+  text-decoration: none;
+  color: black;
+}
+
+img {
+  border: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*  header */
+header {
+  margin-bottom: 50px;
+}
+
+.main_title h3 {
+  width: 95px;
+  height: 30px;
+  display: inline-block;
+  margin: 10px 0 0 10px;
+}
+
+.search {
+  width: 360px;
+  position: relative;
+  display: flex;
+}
+
+.searchTerm {
+  width: 100%;
+  border: 3px solid #00B4CC;
+  border-right: none;
+  padding: 5px;
+  height: 20px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+
+.searchTerm:focus {
+  color: #00B4CC;
+}
+
+.searchButton {
+  width: 40px;
+  height: 36px;
+  border: 1px solid #00B4CC;
+  background: #00B4CC;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  font-size: 20px;
+}
+
+.wrap {
+  width: 30%;
+  position: absolute;
+}
+
+/* footer */
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 360px;
+  height: 35px;
+  padding: 15px 0;
+  text-align: center;
+  color: white;
+  background: #D6D6D6;
+}
+
+.footer_img {
+  margin: 40px;
+  text-align: center;
+}
+
+/* insert */
+.insert_div {
+  text-align: center;
+}
+
+.insert_main_div {
+  margin-left: 30px;
+  text-align: left;
+}
+
+.insert_input_div {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* login */
+.login_div {
+  text-align: center;
+}
+
+.login_id input {
+  width: 230px;
+  height: 30px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.login_pw input {
+  width: 230px;
+  height: 30px;
+  margin-bottom: 40px;
+}
+
+button {
+  color: #444444;
+  background: #F3F3F3;
+  border: 1px #DADADA solid;
+  padding: 5px 10px;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 9pt;
+  outline: none;
+}
+
+button:hover {
+  border: 1px #C6C6C6 solid;
+  box-shadow: 1px 1px 1px #EAEAEA;
+  color: #333333;
+  background: #F7F7F7;
+}
+
+button:active {
+  box-shadow: inset 1px 1px 1px #DFDFDF;
+}
+
+/* signup */
+.signup_div {
+  text-align: center;
+  margin: 50px;
+}
+
+.signup_btn_div {
+  text-align: center;
+}
+
+/* index */
+.index_img img {
+  width: 64px;
+  height: 64px;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+/* search_List */
+.search_img img {
+  width: 220px;
+  height: 98px;
+}
+
+.search_index {
+  text-align: center;
+}
+
+.searchList_div {
+  margin-bottom: 60px;
+}
