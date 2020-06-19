@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping(value="/member")
+@RequestMapping(value = "/member")
 public class MemberController {
 
     @Autowired
@@ -25,8 +25,8 @@ public class MemberController {
     }
 
     //로그아웃
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logout(HttpSession session){
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
         session.invalidate();
         return "로그아웃 완료";
     }

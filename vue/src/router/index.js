@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '../components/index.vue'
-import Insert from '../components/insert.vue'
-import Login from '../components/login.vue'
-import SignUp from '../components/signUp.vue'
-import SearchList from '../components/searchList.vue'
+import Home from '../components/Index.vue'
+import Insert from '../components/Insert.vue'
+import Login from '../components/Login.vue'
+import SignUp from '../components/SignUp.vue'
+import SearchList from '../components/SearchList.vue'
 
 Vue.use(Router);
 
@@ -13,32 +13,31 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Home',
       component: Home
     },
     {
-      path: '/Home',
-      name: 'Home',
+      path: '/home',
+      name: 'home',
       component: Home
     },
     {
-      path: '/Insert',
-      name: 'Insert',
+      path: '/insert',
+      name: 'insert',
       component: Insert
     },
     {
-      path: '/Login',
-      name: 'Login',
+      path: '/login',
+      name: 'login',
       component: Login
     },
     {
-      path: '/SignUp',
-      name: 'SignUp',
+      path: '/member/signUp',
+      name: '/member/signUp',
       component: SignUp
     },
     {
-      path: '/SearchList',
-      name: 'SearchList',
+      path: '/searchList',
+      name: 'searchList',
       component: SearchList
     }
   ]

@@ -11,7 +11,7 @@
         </div>
         <div class="login_btn">
           <button type="button">로그인</button>
-          <router-link to="/SignUp" tag="button">회원가입</router-link>
+          <router-link to="/member/signUp" tag="button">회원가입</router-link>
         </div>
       </div>
       <!-- <div v-if="">
