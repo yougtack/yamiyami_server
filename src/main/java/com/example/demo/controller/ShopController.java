@@ -2,13 +2,13 @@ package com.example.demo.controller;
 
 
 import com.example.demo.model.CategoriesModel;
+import com.example.demo.model.ProductModel;
+import com.example.demo.model.ShopModel;
 import com.example.demo.service.CategoriesService;
 import com.example.demo.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -33,19 +33,35 @@ public class ShopController {
 
     //카테고리 리스트 가져오기
     @RequestMapping(value ="/categories", method = RequestMethod.GET)
-    public List<CategoriesModel> getList(){
+    public List<CategoriesModel> getList(Model model){
         List<CategoriesModel> CategoriesList = categoriesService.CategoriesList();
+        model.addAttribute("categories", CategoriesList);
         return CategoriesList;
     }
 
-    //아직 미완성
-    //가게추가
-    @RequestMapping(value = "/insertShop/{name}/{tel}/{addr}/{open_time}/{end_time}/{foodType}/{userId}", method = RequestMethod.POST)
-    public Integer insertShop(@PathVariable String name, @PathVariable String tel, @PathVariable String addr,
-                              @PathVariable String open_time, @PathVariable String end_time, @PathVariable String foodType,
-                              @PathVariable String userId
-                            ){
+    //맛집추가
+    @RequestMapping(value = "/shop", method = RequestMethod.POST)
+    public Integer insertShop(@RequestBody ShopModel shop, @RequestBody ProductModel product){
+        shopService.insertProduct(product.getPname(), product.getCost());
+        return shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpen_time(), shop.getEnd_time(), shop.getCategoryId(), shop.getUserId());
+    }
 
-        return shopService.insertShop(name, tel, addr, open_time, end_time, foodType, userId);
+    //음식종류별로 리스트뽑기
+    @RequestMapping(value="/category/{categoryId}", method = RequestMethod.GET)
+    public List<ShopModel> Category(@PathVariable Integer categoryId, Model model){
+       List<ShopModel> category = shopService.category(categoryId);
+       model.addAttribute("category", category);
+        return category;
+    }
+
+    //가게 상세정보
+    @RequestMapping(value="/shop/{sid}", method = RequestMethod.GET)
+    public ShopModel viewShop(@PathVariable Integer sid, Model model) {
+        ShopModel shopView = shopService.shopView(sid);
+        model.addAttribute("shop",shopView);
+
+        List<ProductModel> product = shopService.productView(sid);
+        model.addAttribute("product", product);
+        return shopView;
     }
 }

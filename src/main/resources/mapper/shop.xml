@@ -1,21 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.ShopDao">
-    <select id="getList" resultType="com.example.demo.model.ShopModel">
-        select
+    <select id="category" resultType="com.example.demo.model.ShopModel">
+        SELECT
             sid, file, name, tel, addr,
             date_format(open_time,'%H:%i') as open_time,
             date_format(end_time,'%H:%i') as end_time,
-            foodType, userId
-        from
+            categoryId, userId
+        FROM
             shop_info
+        WHERE
+            categoryId = #{categoryId}
+    </select>
+
+    <select id="shopView" resultType="com.example.demo.model.ShopModel">
+        SELECT
+            sid, file, name, tel, addr,
+            date_format(open_time,'%H:%i') as open_time,
+            date_format(end_time,'%H:%i') as end_time,
+            categoryId, userId
+        FROM
+            shop_info
+        WHERE
+            sid = #{sid}
+    </select>
+
+    <select id="productView" resultType="com.example.demo.model.ProductModel">
+        SELECT
+            *
+        FROM
+            shop_product
+        WHERE
+            sid = #{sid}
     </select>
 
     <insert id="insertShop" parameterType="String" useGeneratedKeys="true">
         INSERT INTO
-            shop_info(name, tel, addr, open_time, end_time, foodType, userId)
+            shop_info(name, tel, addr, open_time, end_time, categoryId, userId)
         VALUES
-            (#{name}, #{tel}, #{addr}, #{open_time}, #{end_time}, #{foodType}, #{userId})
+            (#{name}, #{tel}, #{addr}, #{open_time}, #{end_time}, #{categoryId}, #{userId})
+    </insert>
+
+    <insert id="insertProduct" parameterType="String">
+        INSERT INTO
+            shop_product(sid, pname, cost)
+        VALUES
+         ((SELECT MAX(sid) from shop_info), #{pname}, #{cost});
     </insert>
 </mapper>
-

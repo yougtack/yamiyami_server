@@ -1,9 +1,13 @@
 package com.example.demo.service.serviceimpl;
 
 import com.example.demo.dao.ShopDao;
+import com.example.demo.model.ProductModel;
+import com.example.demo.model.ShopModel;
 import com.example.demo.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ShopServiceImpl implements ShopService {
@@ -11,9 +15,28 @@ public class ShopServiceImpl implements ShopService {
     private ShopDao dao;
 
     @Override
-    public Integer insertShop(String name, String tel, String addr, String open_time, String end_time, String foodType, String userId){
-        return dao.insertShop(name, tel, addr, open_time, end_time, foodType, userId);
+    public Integer insertShop(String name, String tel, String addr, String open_time, String end_time, String categoryId, String userId){
+        return dao.insertShop(name, tel, addr, open_time, end_time, categoryId, userId);
+    }
+
+    @Override
+    public Integer insertProduct(String pname, String cost){
+        return dao.insertProduct(pname, cost);
+    }
+
+    @Override
+    public List<ShopModel> category(Integer categoryId){
+        return dao.category(categoryId);
+    }
+
+    @Override
+    public ShopModel shopView(Integer sid){
+        return dao.shopView(sid);
+    }
+
+    @Override
+    public List<ProductModel> productView(Integer sid){
+        return dao.productView(sid);
     }
 
 }
-
