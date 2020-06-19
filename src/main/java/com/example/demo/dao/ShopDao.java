@@ -1,12 +1,26 @@
 package com.example.demo.dao;
 
+import com.example.demo.model.ProductModel;
+import com.example.demo.model.ShopModel;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ShopDao {
     Integer insertShop(
             @Param("name") String name,
             @Param("tel") String tel, @Param("addr") String addr,
             @Param("open_time") String open_time, @Param("end_time") String end_time,
-            @Param("foodType") String foodType, @Param("userId") String userId
+            @Param("categoryId") String categoryId, @Param("userId") String userId
     );
+
+    Integer insertProduct(@Param("pname") String pname, @Param("cost") String cost);
+
+    List<ShopModel> category(@Param("categoryId") Integer categoryId);
+
+    ShopModel shopView(@Param("sid") Integer sid);
+
+
+    List<ProductModel> productView(@Param("sid") Integer sid);
+
 }

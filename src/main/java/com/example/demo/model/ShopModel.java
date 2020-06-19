@@ -13,12 +13,8 @@ public class ShopModel {
     private String addr;
     private String open_time;
     private String end_time;
-    private String foodType;
+    private String categoryId;
     private String userId;
-
-    private String pfile;
-    private String pname;
-    private int cost;
 
 
 
