@@ -7,6 +7,8 @@ import com.example.demo.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommentServiceImpl implements CommentService {
 
@@ -22,6 +24,26 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Integer deleteComment(Integer cid){
         return dao.deleteComment(cid);
+    }
+
+    @Override
+    public CommentModel getCid(Integer cid){
+        return dao.getCid(cid);
+    }
+
+    @Override
+    public Integer updateComment(Integer cid, String comment){
+        return dao.updateComment(cid, comment);
+    }
+
+    @Override
+    public List<CommentModel> showComments(Integer sid){
+        return dao.showComments(sid);
+    }
+
+    @Override
+    public List<CommentModel> myComments(Integer userNo){
+        return dao.myComments(userNo);
     }
 
 }

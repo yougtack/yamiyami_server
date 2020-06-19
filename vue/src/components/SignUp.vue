@@ -7,16 +7,14 @@
       비밀번호<br>
       <input type="password" v-model="userPw"><br><br>
       비밀번호 확인<br>
-      <input @keyup.enter="SignUp_Check" type="password" v-model="userPwTest"><br><br>
+      <input @keyup.enter="SignUp" type="password" v-model="userPwTest"><br><br>
     </div>
     <div class="signup_btn_div">
-      <input @click="SignUp_Check" type="button" value="완료">
+      <input @click="SignUp" type="button" value="완료">
     </div>
   </div>
 </template>
 <script>
-  import axios from 'axios';
-
   export default {
     data() {
       return {
@@ -26,26 +24,24 @@
       }
     },
     methods: {
-      SignUp_Check: function () {
-        const params = new URLSearchParams();
+      SignUp: function () {
         if (!this.userId || !this.userPw || !this.userPwTest) {
-          alert("빈 칸에 값을 넣어주세요");
+          alert("빈 칸에 값을 넣어주세요.");
         } else if (this.userPw !== this.userPwTest) {
           alert("비밀번호가 불일치합니다.");
         } else {
-          params.append('userId', this.userId);
-          params.append('userPw', this.userPw);
-          axios.post('/member/signUp', {params}
-          ).then((ex => {
-            alert("들어갔음", ex);
+          const data = {
+            "userId": this.userId,
+            "userPw": this.userPw
+          };
+          this.$axios.post('/member/signUp', {
+            data
+          }).then((ex => {
+            console.log(ex);
+            alert("성공");
           })).catch((ex => {
-            if (ex.response) {
-              console.log("response Error", ex);
-            } else if (ex.request) {
-              console.log("request Error", ex);
-            } else {
-              console.log("Error", ex);
-            }
+            console.log("ERR!!!", ex);
+            console.log(data);
           }))
         }
       }

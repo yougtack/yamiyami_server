@@ -11,7 +11,7 @@ public interface ShopDao {
             @Param("name") String name,
             @Param("tel") String tel, @Param("addr") String addr,
             @Param("open_time") String open_time, @Param("end_time") String end_time,
-            @Param("categoryId") String categoryId, @Param("userId") String userId
+            @Param("categoryId") Integer categoryId, @Param("userId") String userId
     );
 
     Integer insertProduct(@Param("pname") String pname, @Param("cost") String cost);
@@ -23,4 +23,14 @@ public interface ShopDao {
 
     List<ProductModel> productView(@Param("sid") Integer sid);
 
+    List<ShopModel> myShop(@Param("userId") String userId);
+
+    Integer deleteMyShop(@Param("sid") Integer sid);
+
+    Integer updateMyShop(
+            @Param("sid") Integer sid, @Param("name") String name,
+            @Param("tel") String tel, @Param("addr") String addr,
+            @Param("open_time") String open_time, @Param("end_time") String end_time,
+            @Param("categoryId") Integer categoryId
+    );
 }
