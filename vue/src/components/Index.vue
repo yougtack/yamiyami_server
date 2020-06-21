@@ -1,35 +1,24 @@
 <template>
   <div class="index_img">
-    <div v-for="">
-      <router-link to="/searchList"><img src="../assets/picture/1.png"/></router-link>
-      <router-link to="/searchList"><img src="../assets/picture/2.png"/></router-link>
-      <router-link to="/searchList"><img src="../assets/picture/3.png"/></router-link>
-      <router-link to="/searchList"><img src="../assets/picture/4.png"/></router-link>
-    </div>
     <div>
-      <router-link to="/searchList"><img src="../assets/picture/5.png"/></router-link>
-      <router-link to="/searchList"><img src="../assets/picture/6.png"/></router-link>
-      <router-link to="/searchList"><img src="../assets/picture/7.png"/></router-link>
-      <router-link to="/searchList"><img src="../assets/picture/8.png"/></router-link>
-    </div>
-    <div>
-      <router-link to="/searchList"><img src="../assets/picture/9.png"/></router-link>
-      <router-link to="/searchList"><img src="../assets/picture/10.png"/></router-link>
-      <router-link to="/searchList"><img src="../assets/picture/11.png"/></router-link>
-      <router-link to="/searchList"><img src="../assets/picture/12.png"/></router-link>
-    </div>
-    <div>
-      <router-link to="/searchList"><img src="../assets/picture/13.png"/></router-link>
-      <img src="../assets/picture/none.png"/>
-      <img src="../assets/picture/none.png"/>
-      <img src="../assets/picture/none.png"/>
+      <span v-for="(item,i) in info" v-bind:key="i">
+      <router-link to="/category"><img src="../assets/picture/1.png"></router-link>
+      </span>
     </div>
   </div>
 </template>
 <script>
   export default {
-    date() {
-
+    data() {
+      return {
+        info: null
+      }
+    },
+    //https://api.coindesk.com/v1/bpi/currentprice.json
+    //    /main/categories
+    mounted() {
+      this.$http.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+        .then(ex => this.info = ex)
     }
   }
 </script>

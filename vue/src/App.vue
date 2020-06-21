@@ -14,6 +14,7 @@
   import Index from "./components/Index.vue";
   import SignUp from "./components/SignUp.vue";
   import SearchList from './components/SearchList.vue';
+  import Category from './components/Category.vue';
 
   export default {
     components: {
@@ -23,7 +24,8 @@
       Login: Login,
       Index: Index,
       SignUp: SignUp,
-      SearchList: SearchList
+      SearchList: SearchList,
+      Category: Category
     }
   };
 </script>

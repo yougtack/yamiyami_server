@@ -5,6 +5,7 @@ import Insert from '../components/Insert.vue'
 import Login from '../components/Login.vue'
 import SignUp from '../components/SignUp.vue'
 import SearchList from '../components/SearchList.vue'
+import Category from '../components/Category.vue'
 
 Vue.use(Router);
 
@@ -39,6 +40,11 @@ export default new Router({
       path: '/searchList',
       name: 'searchList',
       component: SearchList
+    },
+    {
+      path: '/category',
+      name: 'category',
+      component: Category
     }
   ]
 });

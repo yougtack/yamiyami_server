@@ -4,7 +4,7 @@
       <div>
         <h3 style="text-align: center;">로그인</h3>
         <div class="login_id">
-          <input type="text" placeholder="아이디" />
+          <input type="text" placeholder="아이디"/>
         </div>
         <div class="login_pw">
           <input type="password" placeholder="비밀번호"/>
