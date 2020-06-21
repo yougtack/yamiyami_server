@@ -8,7 +8,7 @@ import java.util.List;
 public interface ShopService {
 
     //가게추가
-    Integer insertShop (String name, String tel, String addr, String open_time, String end_time, String categoryId, String userId);
+    Integer insertShop (String name, String tel, String addr, String open_time, String end_time, Integer categoryId, String userId);
 
     //상품추가
     Integer insertProduct(String pname, String cost);
@@ -21,4 +21,14 @@ public interface ShopService {
 
     //가게 상세정보_상품
     List<ProductModel> productView(Integer sid);
+
+    //내가 입력한 가게 보기
+    List<ShopModel> myShop(String userId);
+
+    //내가 입력한 가게 삭제하기
+    Integer deleteMyShop(Integer sid);
+
+    //내가 입력한 가게 수정하기
+    Integer updateMyShop(Integer sid, String name, String tel, String addr, String open_time, String end_time, Integer categoryId);
+
 }

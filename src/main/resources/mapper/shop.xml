@@ -47,4 +47,33 @@
         VALUES
          ((SELECT MAX(sid) from shop_info), #{pname}, #{cost});
     </insert>
+
+    <select id="myShop" resultType="com.example.demo.model.ShopModel">
+        SELECT
+            sid, file, name, tel, addr,
+            date_format(open_time,'%H:%i') as open_time,
+            date_format(end_time,'%H:%i') as end_time,
+            categoryId, userId
+        FROM
+            shop_info
+        WHERE
+            userId = #{userId}
+    </select>
+
+    <delete id="deleteMyShop" parameterType="int">
+        DELETE FROM
+            shop_info
+        WHERE
+            sid = ${sid}
+    </delete>
+
+    <update id="updateMyShop" parameterType="String">
+        UPDATE
+            shop_info
+        SET
+            name = #{name}, tel = #{tel}, addr = #{addr}, open_time = #{open_time}, end_time = #{end_time},
+            categoryId = ${categoryId}
+        WHERE
+            sid = ${sid}
+    </update>
 </mapper>

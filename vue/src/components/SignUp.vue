@@ -20,7 +20,9 @@
       return {
         userId: ''.trim(),
         userPw: ''.trim(),
-        userPwTest: ''.trim()
+        userPwTest: ''.trim(),
+        NullOk: false,
+        CheckOk: false
       }
     },
     methods: {

@@ -14,4 +14,42 @@
         WHERE
             cid = #{cid}
     </delete>
+
+    <select id="getCid" resultType="com.example.demo.model.CommentModel">
+        SELECT
+            *
+        FROM
+            shop_comments
+        WHERE
+            cid = ${cid}
+    </select>
+
+    <update  id="updateComment" parameterType="String">
+        UPDATE
+            shop_comments
+        SET
+            comment = #{comment}
+        WHERE
+            cid = ${cid}
+    </update>
+
+    <select id="showComments" resultType="com.example.demo.model.CommentModel">
+        SELECT
+             *
+        FROM
+            shop_comments
+        WHERE
+            sid = ${sid}
+        ORDER BY
+            cid
+    </select>
+
+    <select id="myComments" resultType="com.example.demo.model.CommentModel">
+        SELECT
+            *
+        FROM
+            shop_comments
+        WHERE
+            userNo = #{userNo}
+    </select>
 </mapper>

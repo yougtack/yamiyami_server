@@ -13,7 +13,7 @@ public class ShopModel {
     private String addr;
     private String open_time;
     private String end_time;
-    private String categoryId;
+    private int categoryId;
     private String userId;
 
 
