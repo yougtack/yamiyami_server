@@ -4,9 +4,19 @@ package com.example.demo.controller;
 import com.example.demo.model.MemberModel;
 import com.example.demo.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.security.Security;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/member")
@@ -20,7 +30,6 @@ public class MemberController {
     public MemberModel Login(@RequestBody MemberModel member, HttpSession session){
         MemberModel userInfo = memberService.login(member.getUserId(), member.getUserPw());
         session.setAttribute("member", userInfo);
-
         return userInfo;
     }
 

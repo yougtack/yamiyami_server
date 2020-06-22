@@ -4,13 +4,15 @@ package com.example.demo.controller;
 import com.example.demo.model.*;
 import com.example.demo.service.CategoriesService;
 import com.example.demo.service.ShopService;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -20,48 +22,75 @@ public class ShopController {
     @Autowired
     ShopService shopService;
 
+
     @Autowired
     CategoriesService categoriesService;
 
+    @Autowired
+    @Qualifier("sqlSession")
+    private SqlSessionTemplate sqlSession;
+
     //인덱스페이지 이동
     @RequestMapping(value="/index", method = RequestMethod.GET)
-    public ModelAndView IndexPage(){
-        ModelAndView mav = new ModelAndView("/index");
-        return mav;
+    public void IndexPage(@RequestHeader(value = "user-Agent") String userAgent){
+        System.out.println(userAgent);
+        System.out.println(userAgent.indexOf("Chrome"));
+        System.out.println(userAgent.indexOf("CriOS"));
     }
 
     //카테고리 리스트 가져오기
     @RequestMapping(value ="/categories", method = RequestMethod.GET)
-    public List<CategoriesModel> getList(Model model){
-        List<CategoriesModel> CategoriesList = categoriesService.CategoriesList();
-        model.addAttribute("categories", CategoriesList);
-        return CategoriesList;
+    public List<CategoriesModel> getList(){
+        List<CategoriesModel> categoriesList = categoriesService.CategoriesList();
+        return categoriesList;
     }
 
     //음식종류별로 리스트뽑기
     @RequestMapping(value="/category/{categoryId}", method = RequestMethod.GET)
-    public List<ShopModel> Category(@PathVariable Integer categoryId, Model model){
+    public List<ShopModel> Category(@PathVariable Integer categoryId){
        List<ShopModel> category = shopService.category(categoryId);
-       model.addAttribute("category", category);
         return category;
     }
 
     //가게 상세정보
     @RequestMapping(value="/shop/{sid}", method = RequestMethod.GET)
-    public ShopModel viewShop(@PathVariable Integer sid, Model model) {
-        ShopModel shopView = shopService.shopView(sid);
-        model.addAttribute("shop",shopView);
-
-        List<ProductModel> product = shopService.productView(sid);
-        model.addAttribute("product", product);
+    public List<ShopModel> viewShop(@PathVariable Integer sid) {
+//        ShopModel shopModel = new ShopModel();
+//        shopModel.setSid(6);
+//        shopModel.setName("슈퍼집");
+//        shopModel.setTel("02-540-1591");
+//        shopModel.setAddr("서울특별시 강남구 논현동 246-1");
+//        shopModel.setOpen_time("11:30");
+//        shopModel.setEnd_time("01:00");
+//        shopModel.setCategoryId(2);
+//        shopModel.setUserId("asd");
+//
+//        HashMap<String, Object> map = new HashMap<String, Object>();
+//        map.put("pname","마늘 떡볶이");
+//        map.put("cost",9000);
+//        shopModel.setMap(map);
+//
+//
+//        System.out.println("model:"+shopModel.getSid());
+//        System.out.println("model:"+shopModel.getName());
+//        System.out.println("model:"+shopModel.getTel());
+//        System.out.println("model:"+shopModel.getAddr());
+//        System.out.println("model:"+shopModel.getOpen_time());
+//        System.out.println("model:"+shopModel.getEnd_time());
+//        System.out.println("model:"+shopModel.getCategoryId());
+//        System.out.println("model:"+shopModel.getUserId());
+//        System.out.println("model:"+shopModel.getMap());
+//
+        List<ShopModel> shopView = shopService.shopView(sid);
+        sqlSession.selectList("getProduct", shopView);
         return shopView;
+
     }
 
     //맛집추가
     @RequestMapping(value = "/shop", method = RequestMethod.POST)
-    public Integer insertShop(@RequestBody ShopModel shop, @RequestBody ProductModel product){
-        shopService.insertProduct(product.getPname(), product.getCost());
-        return shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpen_time(), shop.getEnd_time(), shop.getCategoryId(), shop.getUserId());
+    public Integer insertShop(@RequestBody ShopModel shop){
+        return shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpen_time(), shop.getEnd_time(), shop.getCategoryId(), shop.getUserId(), shop.getPname(), shop.getCost());
     }
 
     //내가쓴 맛집
@@ -81,6 +110,5 @@ public class ShopController {
     @RequestMapping(value = "/myShop", method = RequestMethod.PUT)
     public Integer updateMyShop(@RequestBody ShopModel shop){
         return shopService.updateMyShop(shop.getSid(), shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpen_time(), shop.getEnd_time(), shop.getCategoryId());
-
     }
 }

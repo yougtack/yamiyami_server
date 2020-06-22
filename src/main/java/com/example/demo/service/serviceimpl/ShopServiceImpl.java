@@ -15,13 +15,8 @@ public class ShopServiceImpl implements ShopService {
     private ShopDao dao;
 
     @Override
-    public Integer insertShop(String name, String tel, String addr, String open_time, String end_time, Integer categoryId, String userId){
-        return dao.insertShop(name, tel, addr, open_time, end_time, categoryId, userId);
-    }
-
-    @Override
-    public Integer insertProduct(String pname, String cost){
-        return dao.insertProduct(pname, cost);
+    public Integer insertShop(String name, String tel, String addr, String open_time, String end_time, Integer categoryId, String userId, String pname, Integer cost){
+        return dao.insertShop(name, tel, addr, open_time, end_time, categoryId, userId, pname, cost);
     }
 
     @Override
@@ -30,7 +25,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public ShopModel shopView(Integer sid){
+    public List<ShopModel> shopView(Integer sid){
         return dao.shopView(sid);
     }
 
@@ -53,7 +48,4 @@ public class ShopServiceImpl implements ShopService {
     public Integer updateMyShop(Integer sid, String name, String tel, String addr, String open_time, String end_time, Integer categoryId){
         return dao.updateMyShop(sid, name, tel, addr, open_time, end_time, categoryId);
     }
-
-
-
 }

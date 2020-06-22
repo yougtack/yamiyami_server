@@ -3,6 +3,8 @@ package com.example.demo.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Map;
+
 @Getter
 @Setter
 public class ShopModel {
@@ -16,6 +18,7 @@ public class ShopModel {
     private int categoryId;
     private String userId;
 
-
-
+    private String pfile;
+    private String pname;
+    private int cost;
 }

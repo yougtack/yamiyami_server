@@ -35,15 +35,22 @@ dependencies {
     compile("org.mybatis:mybatis-spring")
     compile("org.mybatis:mybatis")
 
+
     //JDBC
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     compile('mysql:mysql-connector-java')
 
     //JSON(JavaScript Object Notation)
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
-    //GSON
-    compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
+
+    //시큐리티
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
 }
+
 
 test {
     useJUnitPlatform()

@@ -11,14 +11,15 @@ public interface ShopDao {
             @Param("name") String name,
             @Param("tel") String tel, @Param("addr") String addr,
             @Param("open_time") String open_time, @Param("end_time") String end_time,
-            @Param("categoryId") Integer categoryId, @Param("userId") String userId
+            @Param("categoryId") Integer categoryId, @Param("userId") String userId,
+            @Param("pname") String pname, @Param("cost") Integer cost
     );
 
     Integer insertProduct(@Param("pname") String pname, @Param("cost") String cost);
 
     List<ShopModel> category(@Param("categoryId") Integer categoryId);
 
-    ShopModel shopView(@Param("sid") Integer sid);
+    List<ShopModel> shopView(@Param("sid") Integer sid);
 
 
     List<ProductModel> productView(@Param("sid") Integer sid);

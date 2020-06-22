@@ -15,14 +15,32 @@
 
     <select id="shopView" resultType="com.example.demo.model.ShopModel">
         SELECT
-            sid, file, name, tel, addr,
-            date_format(open_time,'%H:%i') as open_time,
-            date_format(end_time,'%H:%i') as end_time,
-            categoryId, userId
+--             si.sid, si.file, si.name, si.tel, si.addr,
+--             date_format(si.open_time,'%H:%i') as open_time,
+--             date_format(si.end_time,'%H:%i') as end_time,
+--             si.categoryId, si.userId, sp.pname, sp.cost
+            *
         FROM
-            shop_info
+            shop_info si, shop_product sp
         WHERE
-            sid = #{sid}
+            si.sid = sp.sid
+        AND
+            si.sid = ${sid}
+    </select>
+
+    <select id="getProduct" resultType="com.example.demo.model.ShopModel">
+        SELECT
+             sp.pname, sp.cost
+        FROM
+            shop_info si, shop_product sp
+        WHERE
+            si.sid = sp.sid
+        AND
+            sp.pname
+        IN
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item.pname}
+        </foreach>
     </select>
 
     <select id="productView" resultType="com.example.demo.model.ProductModel">

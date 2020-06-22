@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 @MapperScan(basePackages = "com.example.demo.Dao")
 public class DataAccessConfig {
 
-    @Bean
+    @Bean(name = "sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
 
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
@@ -26,7 +26,7 @@ public class DataAccessConfig {
         return sessionFactory.getObject();
     }
 
-    @Bean
+    @Bean(name = "sqlSession")
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
