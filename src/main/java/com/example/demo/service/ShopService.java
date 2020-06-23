@@ -8,16 +8,14 @@ import java.util.List;
 public interface ShopService {
 
     //가게추가
-    Integer insertShop (String name, String tel, String addr, String open_time, String end_time, Integer categoryId, String userId, String pname, Integer cost);
+    Integer insertShop (String name, String tel, String addr, String open_time, String end_time, Integer categoryId, String userId);
 
+    Integer insertProduct(String pname, Integer cost);
     //음식 종류별
     List<ShopModel> category(Integer category);
 
     //가게 상세정보
-    List<ShopModel> shopView(Integer sid);
-
-    //가게 상세정보_상품
-    List<ProductModel> productView(Integer sid);
+    ShopModel shopView(Integer sid);
 
     //내가 입력한 가게 보기
     List<ShopModel> myShop(String userId);

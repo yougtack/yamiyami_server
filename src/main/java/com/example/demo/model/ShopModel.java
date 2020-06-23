@@ -3,6 +3,9 @@ package com.example.demo.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -18,7 +21,9 @@ public class ShopModel {
     private int categoryId;
     private String userId;
 
-    private String pfile;
+    private List<ProductModel> products;
+    private List<CommentModel> comments;
+
     private String pname;
-    private int cost;
+    private Integer cost;
 }
