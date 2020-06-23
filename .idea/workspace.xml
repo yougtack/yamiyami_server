@@ -3,17 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0942f0d3-50f5-4982-9ade-4978662a9a72" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/MemberController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/ShopController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/dao/ShopDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/dao/ShopDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/model/CategoriesModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/model/CategoriesModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/model/ProductModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/model/ProductModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/model/ShopModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/model/ShopModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/model/UserModel.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/ShopService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/ShopService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/serviceimpl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/serviceimpl/ShopServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/categories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/categories.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/shop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/shop.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -139,7 +133,7 @@
       <workItem from="1592822953833" duration="2646000" />
       <workItem from="1592840363951" duration="650000" />
       <workItem from="1592841019009" duration="2094000" />
-      <workItem from="1592843460258" duration="549000" />
+      <workItem from="1592843460258" duration="1513000" />
     </task>
     <task id="LOCAL-00001" summary="api추가&#10;MemberController안에 로그인, 로그아웃, 회원가입 추가했음">
       <created>1592452276945</created>
@@ -190,7 +184,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592811048399</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="가게추가 api구현 완료 및 GET방식 받아오는 형태수정">
+      <created>1592873050871</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1592873050872</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,14 +205,15 @@
     <MESSAGE value="my맛집 구성&#10;내가쓴 쓴 후기&#10;내가 작성한 맛집 수정, 삭제, 검색 할 수있게하는 api구성" />
     <MESSAGE value="뭐바궜을까" />
     <MESSAGE value="vue제거" />
-    <option name="LAST_COMMIT_MESSAGE" value="vue제거" />
+    <MESSAGE value="가게추가 api구현 완료 및 GET방식 받아오는 형태수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="가게추가 api구현 완료 및 GET방식 받아오는 형태수정" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="398" y="69" key="CommitChangelistDialog2" timestamp="1592811048253">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="1970" y="142" key="CommitChangelistDialog2" timestamp="1592873050667">
+      <screen x="1440" y="0" width="1920" height="1080" />
     </state>
     <state x="398" y="69" key="CommitChangelistDialog2/0.0.1440.900/1440.0.1920.1080@0.0.1440.900" timestamp="1592811048253" />
-    <state x="1970" y="142" key="CommitChangelistDialog2/0.0.1440.900/1440.0.1920.1080@1440.0.1920.1080" timestamp="1592547116136" />
+    <state x="1970" y="142" key="CommitChangelistDialog2/0.0.1440.900/1440.0.1920.1080@1440.0.1920.1080" timestamp="1592873050667" />
     <state width="1398" height="247" key="GridCell.Tab.0.bottom" timestamp="1592843456154">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -305,11 +307,11 @@
     </state>
     <state x="352" y="149" key="SettingsEditor/0.0.1440.900/1440.0.1920.1080@0.0.1440.900" timestamp="1592811416707" />
     <state x="1909" y="179" key="SettingsEditor/0.0.1440.900/1440.0.1920.1080@1440.0.1920.1080" timestamp="1592451762271" />
-    <state x="420" y="233" key="Vcs.Push.Dialog.v2" timestamp="1592811059561">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="2000" y="280" key="Vcs.Push.Dialog.v2" timestamp="1592873059905">
+      <screen x="1440" y="0" width="1920" height="1080" />
     </state>
     <state x="420" y="233" key="Vcs.Push.Dialog.v2/0.0.1440.900/1440.0.1920.1080@0.0.1440.900" timestamp="1592811059561" />
-    <state x="2000" y="280" key="Vcs.Push.Dialog.v2/0.0.1440.900/1440.0.1920.1080@1440.0.1920.1080" timestamp="1592547168398" />
+    <state x="2000" y="280" key="Vcs.Push.Dialog.v2/0.0.1440.900/1440.0.1920.1080@1440.0.1920.1080" timestamp="1592873059905" />
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1592840372025">
       <screen x="0" y="0" width="1440" height="900" />
     </state>

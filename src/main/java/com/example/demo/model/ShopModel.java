@@ -16,8 +16,8 @@ public class ShopModel {
     private String name;
     private String tel;
     private String addr;
-    private String open_time;
-    private String end_time;
+    private String openTime;
+    private String closeTime;
     private int categoryId;
     private String userId;
 

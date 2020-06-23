@@ -63,7 +63,7 @@ public class ShopController {
     //맛집추가
     @RequestMapping(value = "/shop", method = RequestMethod.POST)
     public Integer insertShop(@RequestBody ShopModel shop){
-        shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpen_time(), shop.getEnd_time(), shop.getCategoryId(), shop.getUserId());
+        shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId(), shop.getUserId());
         return shopService.insertProduct(shop.getPname(), shop.getCost());
     }
 
@@ -83,6 +83,6 @@ public class ShopController {
     //내가쓴 맛집 수정
     @RequestMapping(value = "/myShop", method = RequestMethod.PUT)
     public Integer updateMyShop(@RequestBody ShopModel shop){
-        return shopService.updateMyShop(shop.getSid(), shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpen_time(), shop.getEnd_time(), shop.getCategoryId());
+        return shopService.updateMyShop(shop.getSid(), shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId());
     }
 }

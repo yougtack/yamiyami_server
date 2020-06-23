@@ -47,8 +47,8 @@
     <select id="category" resultMap="categoryResultMap">
         SELECT
             si.sid, si.file, si.name, si.tel, si.addr,
-            date_format(si.open_time,'%H:%i') as open_time,
-            date_format(si.end_time,'%H:%i') as end_time,
+            date_format(si.openTime,'%H:%i') as openTime,
+            date_format(si.closeTime,'%H:%i') as closeTime,
             si.categoryId, si.userId, sc.cid, sc.userNo, sc.comment
         FROM
             shop_info AS si
@@ -61,8 +61,8 @@
     <select id="shopView" resultMap="productResultMap">
         SELECT
             si.sid, si.file, si.name, si.tel, si.addr,
-            date_format(si.open_time,'%H:%i') as open_time,
-            date_format(si.end_time,'%H:%i') as end_time,
+            date_format(si.openTime,'%H:%i') as openTime,
+            date_format(si.closeTime,'%H:%i') as closeTime,
             si.categoryId, si.userId, sp.pfile, sp.pname, sp.cost
         FROM
             shop_info  AS si
@@ -73,9 +73,9 @@
 
     <insert id="insertShop" parameterType="com.example.demo.model.ShopModel">
         INSERT INTO
-            shop_info(name, tel, addr, open_time, end_time, categoryId, userId)
+            shop_info(name, tel, addr, openTime, closeTime, categoryId, userId)
         VALUES
-            (#{name}, #{tel}, #{addr}, #{open_time}, #{end_time}, ${categoryId}, #{userId})
+            (#{name}, #{tel}, #{addr}, #{openTime}, #{closeTime}, ${categoryId}, #{userId})
     </insert>
 
     <insert id="insertProduct" parameterType="String">
@@ -88,8 +88,8 @@
     <select id="myShop" resultMap="productResultMap">
          SELECT
             si.sid, si.file, si.name, si.tel, si.addr,
-            date_format(si.open_time,'%H:%i') as open_time,
-            date_format(si.end_time,'%H:%i') as end_time,
+            date_format(si.openTime,'%H:%i') as openTime,
+            date_format(si.closeTime,'%H:%i') as closeTime,
             si.categoryId, si.userId, sc.cid, sc.userNo, sc.comment,
             sp.pfile, sp.pname, sp.cost
         FROM
@@ -112,7 +112,7 @@
         UPDATE
             shop_info
         SET
-            name = #{name}, tel = #{tel}, addr = #{addr}, open_time = #{open_time}, end_time = #{end_time},
+            name = #{name}, tel = #{tel}, addr = #{addr}, openTime = #{openTime}, closeTime = #{closeTime},
             categoryId = ${categoryId}
         WHERE
             sid = ${sid}

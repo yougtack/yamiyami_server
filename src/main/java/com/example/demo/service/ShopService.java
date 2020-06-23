@@ -8,7 +8,7 @@ import java.util.List;
 public interface ShopService {
 
     //가게추가
-    Integer insertShop (String name, String tel, String addr, String open_time, String end_time, Integer categoryId, String userId);
+    Integer insertShop (String name, String tel, String addr, String openTime, String closeTime, Integer categoryId, String userId);
 
     Integer insertProduct(String pname, Integer cost);
     //음식 종류별
@@ -24,6 +24,6 @@ public interface ShopService {
     Integer deleteMyShop(Integer sid);
 
     //내가 입력한 가게 수정하기
-    Integer updateMyShop(Integer sid, String name, String tel, String addr, String open_time, String end_time, Integer categoryId);
+    Integer updateMyShop(Integer sid, String name, String tel, String addr, String openTime, String closeTime, Integer categoryId);
 
 }
