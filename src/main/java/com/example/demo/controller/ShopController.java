@@ -1,20 +1,20 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.model.*;
 import com.example.demo.service.CategoriesService;
 import com.example.demo.service.ShopService;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/main")
 public class ShopController {
+    MemberController m = new MemberController();
+    Integer ErrorNo = 0;
 
     @Autowired
     ShopService shopService;
@@ -23,19 +23,17 @@ public class ShopController {
     @Autowired
     CategoriesService categoriesService;
 
-    @Autowired
-    @Qualifier("sqlSession")
-    private SqlSessionTemplate sqlSession;
-
     //인덱스페이지 이동
     @RequestMapping(value="/index", method = RequestMethod.GET)
-    public void IndexPage(@RequestHeader(value = "user-Agent") String userAgent){
+    public void IndexPage(@RequestHeader(value = "user-Agent") String userAgent, HttpSession session){
         System.out.println(userAgent);
+        //틀리면 -1이하
+        //맞으면 0이상
+//        if(userAgent.indexOf("PostmanRuntime/7.26.1") > -1){ //iPhone으로 하고싶을때
 
-        //틀리면 1이하
-        //맞으면 1이상
-        //아니다. 0이
-        if(userAgent.indexOf("yamiyamiApp") <= 0){
+        if(userAgent.indexOf("iPhone") > -1){ //그냥 안드로이드
+            System.out.println("yamiyamiApp입니다.// 사실 포스트빵구임");
+            session.setAttribute("userAgent", "iPhone");
         }
     }
 
@@ -62,27 +60,51 @@ public class ShopController {
 
     //맛집추가
     @RequestMapping(value = "/shop", method = RequestMethod.POST)
-    public Integer insertShop(@RequestBody ShopModel shop){
+    public Integer insertShop(@RequestBody ShopModel shop, HttpSession session){
+        if(m.loginCheck((MemberModel)session.getAttribute("member")) == 403){
+            ErrorNo = 403;
+            System.out.println("로그인하지 않고 가게입력해서 입력이안됌.");
+            return ErrorNo;
+        }
+
         shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId(), shop.getUserId());
         return shopService.insertProduct(shop.getPname(), shop.getCost());
     }
 
     //내가쓴 맛집
     @RequestMapping(value = "/myShop/{userId}", method = RequestMethod.GET)
-    public List<ShopModel> myShop(@PathVariable String userId){
+    public List<ShopModel> myShop(@PathVariable String userId, HttpSession session){
+        if(m.loginCheck((MemberModel)session.getAttribute("member")) == 403){
+            System.out.println("로그인안하면 내가쓴 맛집 못봄");
+            return null;
+        }
         List<ShopModel> myShop = shopService.myShop(userId);
         return myShop;
     }
 
     //내가쓴 맛집 삭제
     @RequestMapping(value = "/myShop/{sid}", method = RequestMethod.DELETE)
-    public Integer deleteMyShop(@PathVariable Integer sid){
+    public Integer deleteMyShop(@PathVariable Integer sid, HttpSession session){
+        //에이전트 구분한다 쳐보자
+        //이부분이 web
+            if(m.loginCheck((MemberModel) session.getAttribute("member")) == 403) {
+                ErrorNo = 403;
+                System.out.println("로그인안하면 내가쓴 맛집 삭제안됌");
+                return ErrorNo;
+            }
+        //이부분이 app
+        //만약 앱이라면 다른처리를 해야할까?
         return shopService.deleteMyShop(sid);
     }
 
     //내가쓴 맛집 수정
     @RequestMapping(value = "/myShop", method = RequestMethod.PUT)
-    public Integer updateMyShop(@RequestBody ShopModel shop){
+    public Integer updateMyShop(@RequestBody ShopModel shop, HttpSession session){
+        if(m.loginCheck((MemberModel)session.getAttribute("member")) == 403){
+            ErrorNo = 403;
+            System.out.println("로그인안하면 내가쓴 맛집 수정안됌");
+            return ErrorNo;
+        }
         return shopService.updateMyShop(shop.getSid(), shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId());
     }
 }

@@ -20,7 +20,7 @@
         </collection>
         <collection property="comments" ofType="com.example.demo.model.CommentModel">
             <result property="cid" column="cid"/>
-            <result property="userNo" column="userNo"/>
+            <result property="userId" column="userId"/>
             <result property="comment" column="comment"/>
         </collection>
     </resultMap>
@@ -38,7 +38,7 @@
 
         <collection property="comments" ofType="com.example.demo.model.CommentModel">
             <result property="cid" column="cid"/>
-            <result property="userNo" column="userNo"/>
+            <result property="userId" column="userId"/>
             <result property="comment" column="comment"/>
         </collection>
     </resultMap>
@@ -63,11 +63,14 @@
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') as openTime,
             date_format(si.closeTime,'%H:%i') as closeTime,
-            si.categoryId, si.userId, sp.pfile, sp.pname, sp.cost
+            si.categoryId, si.userId, sp.pfile, sp.pname, sp.cost,
+            sc.comment
         FROM
             shop_info  AS si
         JOIN
             shop_product AS sp ON si.sid = sp.sid
+        JOIN
+            shop_comments AS sc ON si.sid = sc.sid
         WHERE si.sid = ${sid}
     </select>
 
@@ -90,7 +93,7 @@
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') as openTime,
             date_format(si.closeTime,'%H:%i') as closeTime,
-            si.categoryId, si.userId, sc.cid, sc.userNo, sc.comment,
+            si.categoryId, si.userId, sc.cid, sc.comment,
             sp.pfile, sp.pname, sp.cost
         FROM
             shop_info AS si

@@ -7,6 +7,6 @@ import lombok.Setter;
 public class CommentModel {
     private Integer sid;
     private Integer cid;
-    private Integer userNo;
+    private String userId;
     private String comment;
 }

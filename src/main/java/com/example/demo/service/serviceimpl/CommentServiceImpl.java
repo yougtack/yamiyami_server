@@ -17,8 +17,8 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
-    public Integer insertComment(Integer sid, Integer userNo, String comment){
-        return dao.insertComment(sid, userNo, comment);
+    public Integer insertComment(Integer sid, String userId, String comment){
+        return dao.insertComment(sid, userId, comment);
     }
 
     @Override

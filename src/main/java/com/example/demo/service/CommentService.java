@@ -6,7 +6,7 @@ import com.example.demo.model.CommentModel;
 import java.util.List;
 
 public interface CommentService {
-    Integer insertComment(Integer sid, Integer userNo, String comment);
+    Integer insertComment(Integer sid, String userId, String comment);
 
     Integer deleteComment(Integer cid);
 

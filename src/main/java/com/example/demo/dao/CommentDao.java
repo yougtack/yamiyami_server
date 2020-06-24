@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface CommentDao {
-    Integer insertComment(@Param("sid") Integer sid, @Param("userNo") Integer userNo, @Param("comment") String comment);
+    Integer insertComment(@Param("sid") Integer sid, @Param("userId") String userId, @Param("comment") String comment);
 
     Integer deleteComment(@Param("cid") Integer cid);
 

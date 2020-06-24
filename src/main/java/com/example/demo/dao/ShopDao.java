@@ -10,7 +10,7 @@ public interface ShopDao {
     Integer insertShop(
             @Param("name") String name,
             @Param("tel") String tel, @Param("addr") String addr,
-            @Param("open_time") String openTime, @Param("closeTime") String closeTime,
+            @Param("openTime") String openTime, @Param("closeTime") String closeTime,
             @Param("categoryId") Integer categoryId, @Param("userId") String userId
     );
 

@@ -8,5 +8,5 @@ import lombok.Setter;
 public class MemberModel {
     private String userId;
     private String userPw;
-    private String userNo;
+    private Integer userNo;
 }
