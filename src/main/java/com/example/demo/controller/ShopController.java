@@ -3,19 +3,19 @@ package com.example.demo.controller;
 import com.example.demo.model.*;
 import com.example.demo.service.CategoriesService;
 import com.example.demo.service.ShopService;
+import com.example.demo.util.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
 @RestController
 @RequestMapping("/main")
 public class ShopController {
-    MemberController m = new MemberController();
-    Integer ErrorNo = 0;
-
     @Autowired
     ShopService shopService;
 
@@ -25,16 +25,7 @@ public class ShopController {
 
     //인덱스페이지 이동
     @RequestMapping(value="/index", method = RequestMethod.GET)
-    public void IndexPage(@RequestHeader(value = "user-Agent") String userAgent, HttpSession session){
-        System.out.println(userAgent);
-        //틀리면 -1이하
-        //맞으면 0이상
-//        if(userAgent.indexOf("PostmanRuntime/7.26.1") > -1){ //iPhone으로 하고싶을때
-
-        if(userAgent.indexOf("iPhone") > -1){ //그냥 안드로이드
-            System.out.println("yamiyamiApp입니다.// 사실 포스트빵구임");
-            session.setAttribute("userAgent", "iPhone");
-        }
+    public void IndexPage(){
     }
 
     //카테고리 리스트 가져오기
@@ -46,65 +37,75 @@ public class ShopController {
 
     //음식종류별로 리스트뽑기
     @RequestMapping(value="/category/{categoryId}", method = RequestMethod.GET)
-    public List<ShopModel> Category(@PathVariable Integer categoryId){
+    public List<ShopModel> Category(@PathVariable("categoryId") Integer categoryId){
        List<ShopModel> category = shopService.category(categoryId);
         return category;
     }
 
     //가게 상세정보
     @RequestMapping(value="/shop/{sid}", method = RequestMethod.GET)
-    public ShopModel viewShop(@PathVariable Integer sid) {
+    public ShopModel viewShop(@PathVariable("sid") Integer sid) {
         ShopModel shopView = shopService.shopView(sid);
         return shopView;
     }
 
     //맛집추가
     @RequestMapping(value = "/shop", method = RequestMethod.POST)
-    public Integer insertShop(@RequestBody ShopModel shop, HttpSession session){
-        if(m.loginCheck((MemberModel)session.getAttribute("member")) == 403){
-            ErrorNo = 403;
-            System.out.println("로그인하지 않고 가게입력해서 입력이안됌.");
-            return ErrorNo;
-        }
+    public Integer insertShop(@RequestBody ShopModel shop, HttpServletRequest request, HttpServletResponse response){
+        String loginUserId = LoginUtil.getLoginUserId(request);
 
-        shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId(), shop.getUserId());
-        return shopService.insertProduct(shop.getPname(), shop.getCost());
+        Integer insertShop = null;
+        if(loginUserId != null){
+            shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId(), shop.getUserId());
+            insertShop = shopService.insertProduct(shop.getPname(), shop.getCost());
+        }
+        else{
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        }
+        return insertShop;
     }
 
     //내가쓴 맛집
-    @RequestMapping(value = "/myShop/{userId}", method = RequestMethod.GET)
-    public List<ShopModel> myShop(@PathVariable String userId, HttpSession session){
-        if(m.loginCheck((MemberModel)session.getAttribute("member")) == 403){
-            System.out.println("로그인안하면 내가쓴 맛집 못봄");
-            return null;
+    @RequestMapping(value = "/myShop", method = RequestMethod.GET)
+    public List<ShopModel> myShop(HttpServletRequest request, HttpServletResponse response){
+        String loginUserId = LoginUtil.getLoginUserId(request);
+
+        List<ShopModel> myShop = null;
+        if ( loginUserId != null ) { //비어 있지 않으면
+            myShop = shopService.myShop(loginUserId);
         }
-        List<ShopModel> myShop = shopService.myShop(userId);
+        else {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        }
         return myShop;
     }
 
     //내가쓴 맛집 삭제
     @RequestMapping(value = "/myShop/{sid}", method = RequestMethod.DELETE)
-    public Integer deleteMyShop(@PathVariable Integer sid, HttpSession session){
-        //에이전트 구분한다 쳐보자
-        //이부분이 web
-            if(m.loginCheck((MemberModel) session.getAttribute("member")) == 403) {
-                ErrorNo = 403;
-                System.out.println("로그인안하면 내가쓴 맛집 삭제안됌");
-                return ErrorNo;
-            }
-        //이부분이 app
-        //만약 앱이라면 다른처리를 해야할까?
-        return shopService.deleteMyShop(sid);
+    public Integer deleteMyShop(@PathVariable("sid") Integer sid, HttpServletRequest request, HttpServletResponse response){
+        String loginUserId = LoginUtil.getLoginUserId(request); //로그인이 되었는지 안되었는지 확인.. 로그인 되면 string 형태로 loginUserId에 들어감
+
+        Integer deleteMyShop = null;
+        if(loginUserId != null){
+            deleteMyShop = shopService.deleteMyShop(sid);
+        }else{
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        }
+        return deleteMyShop;
     }
 
     //내가쓴 맛집 수정
     @RequestMapping(value = "/myShop", method = RequestMethod.PUT)
-    public Integer updateMyShop(@RequestBody ShopModel shop, HttpSession session){
-        if(m.loginCheck((MemberModel)session.getAttribute("member")) == 403){
-            ErrorNo = 403;
-            System.out.println("로그인안하면 내가쓴 맛집 수정안됌");
-            return ErrorNo;
+    public Integer updateMyShop(@RequestBody ShopModel shop, HttpServletRequest request, HttpServletResponse response){
+        String loginUserId = LoginUtil.getLoginUserId(request);
+
+        Integer updateMyShop = null;
+        if(loginUserId != null){
+            updateMyShop = shopService.updateMyShop(shop.getSid(), shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId());
         }
-        return shopService.updateMyShop(shop.getSid(), shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId());
+        else{
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        }
+        return updateMyShop;
     }
 }

@@ -10,7 +10,7 @@
 
     <select id="login" resultType="com.example.demo.model.MemberModel">
         SELECT
-            *
+            userNo, userId, userPw
         FROM
             member
         WHERE

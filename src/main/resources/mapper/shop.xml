@@ -49,7 +49,7 @@
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') as openTime,
             date_format(si.closeTime,'%H:%i') as closeTime,
-            si.categoryId, si.userId, sc.cid, sc.userNo, sc.comment
+            si.categoryId, si.userId, sc.cid, sc.userId, sc.comment
         FROM
             shop_info AS si
         LEFT OUTER JOIN

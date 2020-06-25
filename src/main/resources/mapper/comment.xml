@@ -3,9 +3,9 @@
 <mapper namespace="com.example.demo.dao.CommentDao">
     <insert id="insertComment" parameterType="String">
         INSERT INTO
-            shop_comments (sid, userNo, comment)
+            shop_comments (sid, userId, comment)
         VALUES
-            (${sid}, ${userNo}, #{comment})
+            (${sid}, #{userId}, #{comment})
     </insert>
 
     <delete id="deleteComment" parameterType="int">
@@ -17,7 +17,7 @@
 
     <select id="getCid" resultType="com.example.demo.model.CommentModel">
         SELECT
-            *
+            cid, sid, userId, comment
         FROM
             shop_comments
         WHERE
@@ -35,7 +35,7 @@
 
     <select id="showComments" resultType="com.example.demo.model.CommentModel">
         SELECT
-             *
+             cid, sid, userId, comment
         FROM
             shop_comments
         WHERE
@@ -46,7 +46,7 @@
 
     <select id="myComments" resultType="com.example.demo.model.CommentModel">
         SELECT
-            *
+            cid, sid, userId, comment
         FROM
             shop_comments
         WHERE
