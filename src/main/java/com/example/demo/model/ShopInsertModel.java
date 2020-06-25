@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class ShopModel {
+public class ShopInsertModel {
     private int sid;
     private String file;
     private String name;
@@ -19,9 +19,8 @@ public class ShopModel {
     private String openTime;
     private String closeTime;
     private int categoryId;
-    private int good;
     private String userId;
 
-    private List<ProductModel> products;
-    private List<CommentModel> comments;
+    private String pname;
+    private Integer cost;
 }

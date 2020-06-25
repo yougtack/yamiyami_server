@@ -1,7 +1,6 @@
 package com.example.demo.service.serviceimpl;
 
 import com.example.demo.dao.ShopDao;
-import com.example.demo.model.ProductModel;
 import com.example.demo.model.ShopModel;
 import com.example.demo.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +32,10 @@ public class ShopServiceImpl implements ShopService {
         return dao.shopView(sid);
     }
 
+    @Override
+    public Integer shopGood(Integer sid){
+        return dao.shopGood(sid);
+    }
     @Override
     public List<ShopModel> myShop(String userId){
         return dao.myShop(userId);

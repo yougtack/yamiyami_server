@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.model.ProductModel;
 import com.example.demo.model.ShopModel;
 
 import java.util.List;
@@ -16,6 +15,9 @@ public interface ShopService {
 
     //가게 상세정보
     ShopModel shopView(Integer sid);
+
+    //가게 추천
+    Integer shopGood(Integer sid);
 
     //내가 입력한 가게 보기
     List<ShopModel> myShop(String userId);

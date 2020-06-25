@@ -1,6 +1,5 @@
 package com.example.demo.dao;
 
-import com.example.demo.model.ProductModel;
 import com.example.demo.model.ShopModel;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,6 +18,8 @@ public interface ShopDao {
     List<ShopModel> category(@Param("categoryId") Integer categoryId);
 
     ShopModel shopView(@Param("sid") Integer sid);
+
+    Integer shopGood(@Param("sid") Integer sid);
 
     List<ShopModel> myShop(@Param("userId") String userId);
 

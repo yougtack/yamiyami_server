@@ -19,14 +19,8 @@ public class ShopController {
     @Autowired
     ShopService shopService;
 
-
     @Autowired
     CategoriesService categoriesService;
-
-    //인덱스페이지 이동
-    @RequestMapping(value="/index", method = RequestMethod.GET)
-    public void IndexPage(){
-    }
 
     //카테고리 리스트 가져오기
     @RequestMapping(value ="/categories", method = RequestMethod.GET)
@@ -49,9 +43,23 @@ public class ShopController {
         return shopView;
     }
 
+    //가게 추천
+    @RequestMapping(value = "/shopGood", method = RequestMethod.PUT)
+    public Integer shopGood(@RequestBody ShopModel shop, HttpServletRequest request, HttpServletResponse response){
+        String loginUserId = LoginUtil.getLoginUserId(request);
+
+        Integer shopGood = null;
+        if(loginUserId != null){
+            shopGood = shopService.shopGood(shop.getSid());
+        }
+        else{
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        }
+        return shopGood;
+    }
     //맛집추가
     @RequestMapping(value = "/shop", method = RequestMethod.POST)
-    public Integer insertShop(@RequestBody ShopModel shop, HttpServletRequest request, HttpServletResponse response){
+    public Integer insertShop(@RequestBody ShopInsertModel shop, HttpServletRequest request, HttpServletResponse response){
         String loginUserId = LoginUtil.getLoginUserId(request);
 
         Integer insertShop = null;
