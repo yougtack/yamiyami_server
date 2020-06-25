@@ -19,6 +19,8 @@ public interface ShopService {
     //가게 추천
     Integer shopGood(Integer sid);
 
+    //가게 추천 취소
+    Integer shopGoodCancel(Integer sid);
     //내가 입력한 가게 보기
     List<ShopModel> myShop(String userId);
 

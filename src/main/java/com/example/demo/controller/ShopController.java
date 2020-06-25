@@ -50,7 +50,11 @@ public class ShopController {
 
         Integer shopGood = null;
         if(loginUserId != null){
-            shopGood = shopService.shopGood(shop.getSid());
+            if(shop.getGood()){
+                shopGood = shopService.shopGood(shop.getSid());
+            }else{
+                shopGood= shopService.shopGoodCancel(shop.getSid());
+            }
         }
         else{
             response.setStatus(HttpStatus.UNAUTHORIZED.value());

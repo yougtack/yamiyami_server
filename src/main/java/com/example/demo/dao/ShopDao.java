@@ -21,6 +21,8 @@ public interface ShopDao {
 
     Integer shopGood(@Param("sid") Integer sid);
 
+    Integer shopGoodCancel(@Param("sid") Integer sid);
+
     List<ShopModel> myShop(@Param("userId") String userId);
 
     Integer deleteMyShop(@Param("sid") Integer sid);

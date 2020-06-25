@@ -36,6 +36,12 @@ public class ShopServiceImpl implements ShopService {
     public Integer shopGood(Integer sid){
         return dao.shopGood(sid);
     }
+
+    @Override
+    public Integer shopGoodCancel(Integer sid){
+        return dao.shopGoodCancel(sid);
+    }
+
     @Override
     public List<ShopModel> myShop(String userId){
         return dao.myShop(userId);

@@ -10,15 +10,15 @@
         <result property="openTime" column="openTime"/>
         <result property="closeTime" column="closeTime"/>
         <result property="categoryId" column="categoryId"/>
-        <result property="userId" column="userId"/>
+        <result property="good" column="good"/>
+        <result property="userId" column="shop_userId"/>
 
         <collection property="products" ofType="com.example.demo.model.ProductModel">
             <result property="pfile" column="pfile"/>
             <result property="pname" column="pname"/>
             <result property="cost" column="cost"/>
         </collection>
-        <collection property="comments" ofType="com.example.demo.model.CommentModel">
-            <result property="cid" column="cid"/>
+        <collection property="comments" ofType="com.example.demo.model.CommentShopViewModel">
             <result property="userId" column="userId"/>
             <result property="comment" column="comment"/>
         </collection>
@@ -53,7 +53,7 @@
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') as openTime,
             date_format(si.closeTime,'%H:%i') as closeTime,
-            si.categoryId, si.userId,
+            si.categoryId, si.userId as shop_userId, si.good,
             sc.cid, sc.userId, sc.comment,
             sp.pfile, sp.pname, sp.cost
         FROM
@@ -71,7 +71,7 @@
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') as openTime,
             date_format(si.closeTime,'%H:%i') as closeTime,
-            si.categoryId, si.userId,
+            si.categoryId, si.userId as shop_userId, si.good,
             sp.pfile, sp.pname, sp.cost,
             sc.comment
         FROM
@@ -88,7 +88,7 @@
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') as openTime,
             date_format(si.closeTime,'%H:%i') as closeTime,
-            si.categoryId, si.userId,
+            si.categoryId, si.userId, si.good,
             sc.cid, sc.comment,
             sp.pfile, sp.pname, sp.cost
         FROM
@@ -122,6 +122,32 @@
             categoryId = ${categoryId}
         WHERE
             sid = ${sid}
+    </update>
+
+    <update id="shopGood" parameterType="int">
+        UPDATE
+            shop_info
+        <trim prefix="SET">
+            <choose>
+                <when test="good == false">
+                    good = true
+                </when>
+                <otherwise>
+                    good = false
+                </otherwise>
+            </choose>
+        </trim>
+        WHERE
+            sid = ${sid};
+    </update>
+
+    <update id="shopGoodCancel" parameterType="int">
+        UPDATE
+            shop_info
+        SET
+            good = false
+        WHERE
+            sid = ${sid};
     </update>
 
     <delete id="deleteMyShop" parameterType="int">
