@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0942f0d3-50f5-4982-9ade-4978662a9a72" name="Default Changelist" comment="`comment에 userNo -&gt;userId로 바꿈`">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/util/LoginUtil.java" afterDir="false" />
+    <list default="true" id="0942f0d3-50f5-4982-9ade-4978662a9a72" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/comment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/comment.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/member.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/member.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/shop.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/shop.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/util/LoginUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/util/LoginUtil.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +130,7 @@
       <workItem from="1592841019009" duration="2094000" />
       <workItem from="1592843460258" duration="22479000" />
       <workItem from="1592958263494" duration="23686000" />
-      <workItem from="1592990004201" duration="13118000" />
+      <workItem from="1592990004201" duration="13411000" />
     </task>
     <task id="LOCAL-00001" summary="api추가&#10;MemberController안에 로그인, 로그아웃, 회원가입 추가했음">
       <created>1592452276945</created>
@@ -215,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592980472660</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="변경전&#10;web로그인 방식 session &#10;에러 코드를 그냥 단순한 숫자로만 전달&#10;&#10;변경후&#10;web로그인 방식 cookie함&#10;에러 코드를 HttpStatus를 이용하여 전달 &#10;&#10;api쓰는데에는 차이점이 없음">
+      <created>1593047632518</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1593047632518</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,14 +233,15 @@
     <MESSAGE value="가게추가 api구현 완료 및 GET방식 받아오는 형태수정" />
     <MESSAGE value="open_time -&gt; openTime &#10;end_time -&gt; closeTime으로 수정" />
     <MESSAGE value="comment에 userNo -&gt;userId로 바꿈" />
-    <option name="LAST_COMMIT_MESSAGE" value="comment에 userNo -&gt;userId로 바꿈" />
+    <MESSAGE value="변경전&#10;web로그인 방식 session &#10;에러 코드를 그냥 단순한 숫자로만 전달&#10;&#10;변경후&#10;web로그인 방식 cookie함&#10;에러 코드를 HttpStatus를 이용하여 전달 &#10;&#10;api쓰는데에는 차이점이 없음" />
+    <option name="LAST_COMMIT_MESSAGE" value="변경전&#10;web로그인 방식 session &#10;에러 코드를 그냥 단순한 숫자로만 전달&#10;&#10;변경후&#10;web로그인 방식 cookie함&#10;에러 코드를 HttpStatus를 이용하여 전달 &#10;&#10;api쓰는데에는 차이점이 없음" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1970" y="142" key="CommitChangelistDialog2" timestamp="1593047256925">
+    <state x="1970" y="142" key="CommitChangelistDialog2" timestamp="1593047632314">
       <screen x="1440" y="0" width="1920" height="1080" />
     </state>
     <state x="398" y="69" key="CommitChangelistDialog2/0.0.1440.900/1440.0.1920.1080@0.0.1440.900" timestamp="1592811048253" />
-    <state x="1970" y="142" key="CommitChangelistDialog2/0.0.1440.900/1440.0.1920.1080@1440.0.1920.1080" timestamp="1593047256925" />
+    <state x="1970" y="142" key="CommitChangelistDialog2/0.0.1440.900/1440.0.1920.1080@1440.0.1920.1080" timestamp="1593047632314" />
     <state x="2216" y="446" key="Github.CreateGistDialog" timestamp="1592964999938">
       <screen x="1440" y="0" width="1920" height="1080" />
     </state>

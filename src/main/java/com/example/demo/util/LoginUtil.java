@@ -19,7 +19,7 @@ public class LoginUtil {
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
         return authorization;
     }
-//TODO:앱일때 값 전달받기
+
     public static String getCookieUserId( HttpServletRequest request ) {
         Cookie[] cookies = request.getCookies();
         String cookieValue = null;
