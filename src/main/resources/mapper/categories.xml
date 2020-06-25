@@ -13,7 +13,6 @@
            <result property="openTime" column="openTime"/>
            <result property="closeTime" column="closeTime"/>
            <result property="categoryId" column="categoryId"/>
-           <result property="good" column="good"></result>
            <result property="userId" column="userId"/>
        </collection>
    </resultMap>
@@ -24,7 +23,7 @@
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') AS openTime,
             date_format(si.closeTime,'%H:%i') AS closeTime,
-            si.categoryId, si.userId, si.good
+            si.categoryId, si.userId
         FROM
             categories AS c
         LEFT OUTER JOIN

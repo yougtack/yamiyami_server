@@ -19,7 +19,6 @@ public class ShopModel {
     private String openTime;
     private String closeTime;
     private int categoryId;
-    private int good;
     private String userId;
 
     private List<ProductModel> products;

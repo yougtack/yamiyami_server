@@ -19,6 +19,5 @@ public class ShopCategoriesModel {
     private String openTime;
     private String closeTime;
     private int categoryId;
-    private int good;
     private String userId;
 }
