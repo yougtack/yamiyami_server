@@ -144,6 +144,8 @@
             sid, userId, good
         FROM
             good
+        WHERE
+            sid = ${sid}
         ORDER BY
             sid
     </select>

@@ -37,9 +37,9 @@ public class ShopController {
     }
 
 //    좋아요 정보 가져오기
-    @RequestMapping(value ="/good", method = RequestMethod.GET)
-    public List<GoodModel> getGood(){
-        List<GoodModel> getGoodList = shopService.getGoodList();
+    @RequestMapping(value ="/good/{sid}", method = RequestMethod.GET)
+    public List<GoodModel> getGood(@PathVariable("sid") Integer sid){
+        List<GoodModel> getGoodList = shopService.getGoodList(sid);
         return getGoodList;
     }
 

@@ -15,7 +15,7 @@ public interface ShopService {
     List<ShopModel> category(Integer category);
 
     //좋아요 정보
-    List<GoodModel> getGoodList();
+    List<GoodModel> getGoodList(Integer sid);
 
     //가게랭크
     List<ShopModel> shopRanking();

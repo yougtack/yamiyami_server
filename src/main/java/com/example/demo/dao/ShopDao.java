@@ -19,7 +19,7 @@ public interface ShopDao {
 
     List<ShopModel> category(@Param("categoryId") Integer categoryId);
 
-    List<GoodModel> getGoodList();
+    List<GoodModel> getGoodList(@Param("sid") Integer sid);
 
     List<ShopModel> shopRanking();
 
