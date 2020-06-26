@@ -21,7 +21,7 @@ public class CategoriesServiceImpl implements CategoriesService {
     }
 
     @Override
-    public List<CategoriesModel> insertCategories() {
-        return dao.insertCategories();
+    public List<CategoriesModel> foodCategories() {
+        return dao.foodCategories();
     }
 }

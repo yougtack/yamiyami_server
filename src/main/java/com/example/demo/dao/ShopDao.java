@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.model.CategoriesModel;
 import com.example.demo.model.GoodModel;
 import com.example.demo.model.ShopModel;
 import org.apache.ibatis.annotations.Param;
@@ -17,6 +18,8 @@ public interface ShopDao {
     Integer insertProduct(@Param("pname") String pname, @Param("cost") Integer cost);
 
     List<ShopModel> category(@Param("categoryId") Integer categoryId);
+
+    List<GoodModel> getGoodList();
 
     List<ShopModel> shopRanking();
 

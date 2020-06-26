@@ -25,6 +25,11 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
+    public List<GoodModel> getGoodList(){
+        return dao.getGoodList();
+    }
+
+    @Override
     public List<ShopModel> category(Integer categoryId){
         return dao.category(categoryId);
     }

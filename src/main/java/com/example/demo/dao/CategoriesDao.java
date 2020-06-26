@@ -8,5 +8,5 @@ import java.util.List;
 public interface CategoriesDao {
     List<CategoriesModel> CategoriesList();
 
-    List<CategoriesModel> insertCategories();
+    List<CategoriesModel> foodCategories();
 }

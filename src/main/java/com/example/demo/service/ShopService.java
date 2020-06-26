@@ -14,7 +14,10 @@ public interface ShopService {
     //음식 종류별
     List<ShopModel> category(Integer category);
 
-    //가게랭
+    //좋아요 정보
+    List<GoodModel> getGoodList();
+
+    //가게랭크
     List<ShopModel> shopRanking();
 
     //가게 상세정보

@@ -124,7 +124,7 @@
     <select id="searchWord" resultType="com.example.demo.model.SearchWordModel">
         SELECt
             si.name, si.tel, si.addr,
-            si.openTime, si.closeTime, (select SUM(good) from good where sid = si.sid) AS total_good,
+            si.openTime, si.closeTime, (select SUM(good) from good where sid = ${sid}) AS total_good,
             sp.pname
         FROM
             shop_info AS si
@@ -137,6 +137,15 @@
             si.openTime LIKE CONCAT('%',#{word} ,'%') OR
             si.closeTime LIKE CONCAT('%',#{word} ,'%') OR
             sp.pname LIKE CONCAT('%',#{word} ,'%')
+    </select>
+
+    <select id="getGoodList" resultType="com.example.demo.model.GoodModel">
+        SELECT
+            sid, userId, good
+        FROM
+            good
+        ORDER BY
+            sid
     </select>
 
     <insert id="insertShop" parameterType="com.example.demo.model.ShopInsertModel">

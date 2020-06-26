@@ -30,10 +30,17 @@ public class ShopController {
     }
 
     //카테고리 리스트 랭킹빼고 가져오
-    @RequestMapping(value ="/insertCategories", method = RequestMethod.GET)
+    @RequestMapping(value ="/foodCategories", method = RequestMethod.GET)
     public List<CategoriesModel> getUnRankingList(){
-        List<CategoriesModel> insertCategories = categoriesService.insertCategories();
-        return insertCategories;
+        List<CategoriesModel> foodCategories = categoriesService.foodCategories();
+        return foodCategories;
+    }
+
+//    좋아요 정보 가져오기
+    @RequestMapping(value ="/good", method = RequestMethod.GET)
+    public List<GoodModel> getGood(){
+        List<GoodModel> getGoodList = shopService.getGoodList();
+        return getGoodList;
     }
 
 

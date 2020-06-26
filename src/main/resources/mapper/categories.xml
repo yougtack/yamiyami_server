@@ -34,7 +34,7 @@
             c.categoryId
     </select>
 
-    <select id="insertCategories"  resultType="com.example.demo.model.RmRankingModel">
+    <select id="foodCategories"  resultType="com.example.demo.model.RmRankingModel">
         SELECT
             c.categoryId, c.categoryName, c.image,
             si.sid, si.file, si.name, si.tel, si.addr,

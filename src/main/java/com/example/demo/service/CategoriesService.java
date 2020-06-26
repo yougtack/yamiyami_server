@@ -7,5 +7,5 @@ import java.util.List;
 public interface CategoriesService {
     List<CategoriesModel> CategoriesList();
 
-    List<CategoriesModel> insertCategories();
+    List<CategoriesModel> foodCategories();
 }
