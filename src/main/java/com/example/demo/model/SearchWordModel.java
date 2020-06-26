@@ -3,14 +3,9 @@ package com.example.demo.model;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Getter
 @Setter
-public class ShopCategoriesModel {
+public class SearchWordModel {
     private int sid;
     private String file;
     private String name;
@@ -18,7 +13,5 @@ public class ShopCategoriesModel {
     private String addr;
     private String openTime;
     private String closeTime;
-    private int categoryId;
     private Integer total_good = 0;
-    private String userId;
 }

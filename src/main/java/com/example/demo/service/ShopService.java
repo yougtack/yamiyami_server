@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.model.GoodModel;
 import com.example.demo.model.ShopModel;
 
 import java.util.List;
@@ -13,14 +14,24 @@ public interface ShopService {
     //음식 종류별
     List<ShopModel> category(Integer category);
 
+    //가게랭
+    List<ShopModel> shopRanking();
+
     //가게 상세정보
     ShopModel shopView(Integer sid);
 
-    //가게 추천
-    Integer shopGood(Integer sid);
+    //가게추천 테이블 정보 가져오기
+    GoodModel getGood(Integer sid, String userId);
 
-    //가게 추천 취소
-    Integer shopGoodCancel(Integer sid);
+    //가게 추천 처음일때
+    Integer firstShopGood(Integer sid, String userId);
+
+    //가게 추천 & 취소
+    Integer shopGood(Integer sid, String userId, Integer good);
+
+    //단어검색
+    List<ShopModel> searchWord(String word);
+
     //내가 입력한 가게 보기
     List<ShopModel> myShop(String userId);
 

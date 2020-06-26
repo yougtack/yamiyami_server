@@ -27,11 +27,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentModel getCid(Integer cid){
-        return dao.getCid(cid);
-    }
-
-    @Override
     public Integer updateComment(Integer cid, String comment){
         return dao.updateComment(cid, comment);
     }

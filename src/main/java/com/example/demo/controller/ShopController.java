@@ -29,10 +29,25 @@ public class ShopController {
         return categoriesList;
     }
 
+    //카테고리 리스트 랭킹빼고 가져오
+    @RequestMapping(value ="/rmRanking", method = RequestMethod.GET)
+    public List<CategoriesModel> getUnRankingList(){
+        List<CategoriesModel> rmRankingList = categoriesService.getRmRankingList();
+        return rmRankingList;
+    }
+
+
     //음식종류별로 리스트뽑기
     @RequestMapping(value="/category/{categoryId}", method = RequestMethod.GET)
     public List<ShopModel> Category(@PathVariable("categoryId") Integer categoryId){
-       List<ShopModel> category = shopService.category(categoryId);
+
+        List<ShopModel> shopRanking = null;
+        List<ShopModel> category = null;
+        if(categoryId == 13){
+           shopRanking = shopService.shopRanking();
+           return shopRanking;
+        }
+        category = shopService.category(categoryId);
         return category;
     }
 
@@ -44,22 +59,31 @@ public class ShopController {
     }
 
     //가게 추천
-    @RequestMapping(value = "/shopGood", method = RequestMethod.PUT)
-    public Integer shopGood(@RequestBody ShopModel shop, HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "/shop/good", method = RequestMethod.POST)
+    public Integer shopGood(@RequestBody GoodModel good, HttpServletRequest request, HttpServletResponse response){
         String loginUserId = LoginUtil.getLoginUserId(request);
 
         Integer shopGood = null;
+        GoodModel getGood = shopService.getGood(good.getSid(), good.getUserId());
         if(loginUserId != null){
-            if(shop.getGood()){
-                shopGood = shopService.shopGood(shop.getSid());
-            }else{
-                shopGood= shopService.shopGoodCancel(shop.getSid());
+            if(getGood != null){
+                shopGood = shopService.shopGood(good.getSid(), good.getUserId(), getGood.getGood());
+            }
+            else{
+                shopGood = shopService.firstShopGood(good.getSid(), good.getUserId());
             }
         }
         else{
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
         }
         return shopGood;
+    }
+
+    //단어 검색
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public List<ShopModel> search(@RequestParam("word") String word){
+        List<ShopModel>  searchList = shopService.searchWord(word);
+        return searchList;
     }
     //맛집추가
     @RequestMapping(value = "/shop", method = RequestMethod.POST)

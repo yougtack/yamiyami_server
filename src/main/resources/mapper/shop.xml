@@ -10,7 +10,7 @@
         <result property="openTime" column="openTime"/>
         <result property="closeTime" column="closeTime"/>
         <result property="categoryId" column="categoryId"/>
-        <result property="good" column="good"/>
+        <result property="total_good" column="total_good"/>
         <result property="userId" column="shop_userId"/>
 
         <collection property="products" ofType="com.example.demo.model.ProductModel">
@@ -53,8 +53,8 @@
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') as openTime,
             date_format(si.closeTime,'%H:%i') as closeTime,
-            si.categoryId, si.userId as shop_userId, si.good,
-            sc.cid, sc.userId, sc.comment,
+            si.categoryId, si.userId as shop_userId,
+            sc.cid, sc.userId, sc.comment, (select SUM(good) from good where si.sid = sid) AS total_good,
             sp.pfile, sp.pname, sp.cost
         FROM
             shop_info AS si
@@ -66,14 +66,26 @@
             si.categoryId=${categoryId}
     </select>
 
+    <select id="shopRanking" resultType="com.example.demo.model.ShopRankingModel">
+        SELECT
+            si.sid, si.file, si.name, si.tel, si.addr,
+            date_format(si.openTime,'%H:%i') AS openTime,
+            date_format(si.closeTime,'%H:%i') AS closeTime,
+            si.categoryId, si.userId, (select SUM(good) from good where si.sid = sid) AS total_good
+        FROM
+            shop_info AS si
+        ORDER BY
+            total_good desc limit 0, 5;
+    </select>
+
     <select id="shopView" resultMap="productResultMap">
         SELECT
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') as openTime,
             date_format(si.closeTime,'%H:%i') as closeTime,
-            si.categoryId, si.userId as shop_userId, si.good,
+            si.categoryId, si.userId as shop_userId, (select SUM(good) from good where sid = ${sid}) AS total_good,
             sp.pfile, sp.pname, sp.cost,
-            sc.comment
+            sc.userId, sc.comment
         FROM
             shop_info  AS si
         LEFT OUTER JOIN
@@ -88,7 +100,7 @@
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') as openTime,
             date_format(si.closeTime,'%H:%i') as closeTime,
-            si.categoryId, si.userId, si.good,
+            si.categoryId, si.userId, (select SUM(good) from good where si.sid = sid) AS total_good,
             sc.cid, sc.comment,
             sp.pfile, sp.pname, sp.cost
         FROM
@@ -98,6 +110,33 @@
         LEFT OUTER JOIN
             shop_product AS sp ON si.sid = sp.sid
         WHERE si.userId = #{userId}
+    </select>
+
+    <select id="getGood" resultType="com.example.demo.model.GoodModel">
+        SELECT
+            sid, userId, good
+        FROM
+            good
+        WHERE
+            sid = ${sid} AND userId = #{userId}
+    </select>
+
+    <select id="searchWord" resultType="com.example.demo.model.SearchWordModel">
+        SELECt
+            si.name, si.tel, si.addr,
+            si.openTime, si.closeTime, (select SUM(good) from good where sid = si.sid) AS total_good,
+            sp.pname
+        FROM
+            shop_info AS si
+        LEFT OUTER JOIN
+            shop_product AS sp ON si.sid = sp.sid
+        WHERE
+            si.name LIKE CONCAT('%',#{word} ,'%') OR
+            si.tel LIKE CONCAT('%',#{word} ,'%') OR
+            si.addr LIKE CONCAT('%',#{word} ,'%') OR
+            si.openTime LIKE CONCAT('%',#{word} ,'%') OR
+            si.closeTime LIKE CONCAT('%',#{word} ,'%') OR
+            sp.pname LIKE CONCAT('%',#{word} ,'%')
     </select>
 
     <insert id="insertShop" parameterType="com.example.demo.model.ShopInsertModel">
@@ -114,6 +153,13 @@
          ((SELECT MAX(sid) from shop_info), #{pname}, ${cost});
     </insert>
 
+    <insert id="firstShopGood" parameterType="String">
+        INSERT INTO
+            good(sid, userId)
+        VALUES
+            (${sid}, #{userId})
+    </insert>
+
     <update id="updateMyShop" parameterType="String">
         UPDATE
             shop_info
@@ -124,30 +170,22 @@
             sid = ${sid}
     </update>
 
-    <update id="shopGood" parameterType="int">
+    <update id="shopGood" parameterType="String">
         UPDATE
-            shop_info
+            good
         <trim prefix="SET">
             <choose>
-                <when test="good == false">
-                    good = true
+                <when test="good == 1">
+                    good = 0
                 </when>
                 <otherwise>
-                    good = false
+                    good = 1
                 </otherwise>
             </choose>
         </trim>
         WHERE
-            sid = ${sid};
-    </update>
+            sid = ${sid} AND userId = #{userId}
 
-    <update id="shopGoodCancel" parameterType="int">
-        UPDATE
-            shop_info
-        SET
-            good = false
-        WHERE
-            sid = ${sid};
     </update>
 
     <delete id="deleteMyShop" parameterType="int">

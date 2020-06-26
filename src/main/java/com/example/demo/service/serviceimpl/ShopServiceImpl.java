@@ -1,6 +1,7 @@
 package com.example.demo.service.serviceimpl;
 
 import com.example.demo.dao.ShopDao;
+import com.example.demo.model.GoodModel;
 import com.example.demo.model.ShopModel;
 import com.example.demo.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,15 @@ public class ShopServiceImpl implements ShopService {
     public Integer insertProduct(String pname, Integer cost){
         return dao.insertProduct(pname, cost);
     }
+
     @Override
     public List<ShopModel> category(Integer categoryId){
         return dao.category(categoryId);
+    }
+
+    @Override
+    public List<ShopModel> shopRanking(){
+        return dao.shopRanking();
     }
 
     @Override
@@ -33,15 +40,25 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Integer shopGood(Integer sid){
-        return dao.shopGood(sid);
+    public GoodModel getGood(Integer sid, String userId){
+        return dao.getGood(sid, userId);
     }
 
     @Override
-    public Integer shopGoodCancel(Integer sid){
-        return dao.shopGoodCancel(sid);
+    public Integer firstShopGood(Integer sid, String userId){
+        return dao.firstShopGood(sid, userId);
     }
 
+    @Override
+    public Integer shopGood(Integer sid, String userId, Integer good){
+        return dao.shopGood(sid, userId, good);
+    }
+
+
+    @Override
+    public List<ShopModel> searchWord(String word){
+        return dao.searchWord(word);
+    }
     @Override
     public List<ShopModel> myShop(String userId){
         return dao.myShop(userId);

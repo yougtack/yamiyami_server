@@ -19,7 +19,7 @@ public class ShopModel {
     private String openTime;
     private String closeTime;
     private int categoryId;
-    private Boolean good;
+    private Integer total_good = 0;
     private String userId;
 
     private List<ProductModel> products;

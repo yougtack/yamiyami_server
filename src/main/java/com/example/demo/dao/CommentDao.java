@@ -10,8 +10,6 @@ public interface CommentDao {
 
     Integer deleteComment(@Param("cid") Integer cid);
 
-    CommentModel getCid(@Param("cid") Integer cid);
-
     Integer updateComment(@Param("cid") Integer cid, @Param("comment") String comment);
 
     List<CommentModel> showComments(@Param("sid") Integer sid);

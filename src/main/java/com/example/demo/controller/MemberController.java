@@ -42,7 +42,7 @@ public class MemberController {
     }
 
     //로그아웃
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public String logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("userId","123"); //userId라는 이름으로 쿠키생성
         cookie.setMaxAge(0);

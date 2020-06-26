@@ -10,8 +10,6 @@ public interface CommentService {
 
     Integer deleteComment(Integer cid);
 
-    CommentModel getCid(Integer cid);
-
     Integer updateComment(Integer cid, String comment);
 
     List<CommentModel> showComments(Integer sid);

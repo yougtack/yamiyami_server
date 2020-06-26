@@ -14,6 +14,7 @@
            <result property="openTime" column="openTime"/>
            <result property="closeTime" column="closeTime"/>
            <result property="categoryId" column="shop_categoryId"/>
+           <result property="total_good" column="total_good"/>
            <result property="userId" column="userId"/>
        </collection>
    </resultMap>
@@ -24,7 +25,7 @@
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') AS openTime,
             date_format(si.closeTime,'%H:%i') AS closeTime,
-            si.categoryId as shop_categoryId, si.userId, si.good
+            si.categoryId as shop_categoryId, si.userId, (select SUM(good) from good where si.sid = sid) AS total_good
         FROM
             categories AS c
         LEFT OUTER JOIN
@@ -32,5 +33,26 @@
         ORDER BY
             c.categoryId
     </select>
+
+    <select id="getRmRankingList"  resultType="com.example.demo.model.RmRankingModel">
+        SELECT
+            c.categoryId, c.categoryName, c.image,
+            si.sid, si.file, si.name, si.tel, si.addr,
+            date_format(si.openTime,'%H:%i') AS openTime,
+            date_format(si.closeTime,'%H:%i') AS closeTime,
+            si.categoryId as shop_categoryId, si.userId, (select SUM(good) from good where si.sid = sid) AS total_good
+        FROM
+            categories AS c
+        LEFT OUTER JOIN
+            shop_info AS si ON c.categoryId = si.categoryId
+        WHERE
+            13 > c.categoryId
+        GROUP BY
+            c.categoryId
+        ORDER BY
+            c.categoryId
+    </select>
 </mapper>
+
+
 

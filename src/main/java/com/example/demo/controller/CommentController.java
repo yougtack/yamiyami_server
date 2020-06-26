@@ -65,6 +65,8 @@ public class CommentController {
     public Integer deleteComment(@PathVariable Integer cid, HttpServletRequest request, HttpServletResponse response) {
         String loginUserId = LoginUtil.getLoginUserId(request);
 
+        //그 댓글의 유저아이디와 현재 내 유저아이디가 같으면 삭제되게
+
         Integer deleteComment = null;
         if(loginUserId != null){
             deleteComment = commentService.deleteComment(cid);
@@ -89,6 +91,4 @@ public class CommentController {
         }
         return myComment;
     }
-
-
 }

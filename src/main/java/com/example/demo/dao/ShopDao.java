@@ -1,5 +1,6 @@
 package com.example.demo.dao;
 
+import com.example.demo.model.GoodModel;
 import com.example.demo.model.ShopModel;
 import org.apache.ibatis.annotations.Param;
 
@@ -17,11 +18,17 @@ public interface ShopDao {
 
     List<ShopModel> category(@Param("categoryId") Integer categoryId);
 
+    List<ShopModel> shopRanking();
+
     ShopModel shopView(@Param("sid") Integer sid);
 
-    Integer shopGood(@Param("sid") Integer sid);
+    GoodModel getGood(@Param("sid") Integer sid, @Param("userId") String userId);
 
-    Integer shopGoodCancel(@Param("sid") Integer sid);
+    Integer firstShopGood(@Param("sid") Integer sid, @Param("userId") String userId);
+
+    Integer shopGood(@Param("sid") Integer sid, @Param("userId") String userId, @Param("good") Integer good);
+
+    List<ShopModel> searchWord(@Param("word") String word);
 
     List<ShopModel> myShop(@Param("userId") String userId);
 
