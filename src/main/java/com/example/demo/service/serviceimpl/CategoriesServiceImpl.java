@@ -21,7 +21,7 @@ public class CategoriesServiceImpl implements CategoriesService {
     }
 
     @Override
-    public List<CategoriesModel> getRmRankingList() {
-        return dao.getRmRankingList();
+    public List<CategoriesModel> insertCategories() {
+        return dao.insertCategories();
     }
 }
