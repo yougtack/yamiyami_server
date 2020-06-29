@@ -123,8 +123,10 @@
 
     <select id="searchWord" resultType="com.example.demo.model.SearchWordModel">
         SELECt
-            si.file, si.name, si.tel, si.addr,
-            si.openTime, si.closeTime, (select SUM(good) from good where sid = si.sid) AS total_good,
+            si.sid, si.file, si.name, si.tel, si.addr,
+            date_format(si.openTime,'%H:%i') as openTime,
+            date_format(si.closeTime,'%H:%i') as closeTime,
+            (select SUM(good) from good where sid = si.sid) AS total_good,
             sp.pname
         FROM
             shop_info AS si

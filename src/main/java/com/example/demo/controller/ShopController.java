@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.util.List;
 
 
@@ -102,6 +101,7 @@ public class ShopController {
         Integer insertShop = null;
         if(loginUserId != null){
             shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId(), shop.getUserId());
+
             for(int i=0;i<shop.getPname().length;i++){
                 insertShop = shopService.insertProduct(shop.getPname()[i], shop.getCost()[i]);
             }

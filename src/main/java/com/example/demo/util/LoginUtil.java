@@ -21,6 +21,7 @@ public class LoginUtil {
     }
 
     public static String getCookieUserId( HttpServletRequest request ) {
+
         Cookie[] cookies = request.getCookies();
         String cookieValue = null;
 
