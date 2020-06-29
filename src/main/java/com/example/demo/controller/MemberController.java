@@ -46,6 +46,7 @@ public class MemberController {
     public String logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("userId","123"); //userId라는 이름으로 쿠키생성
         cookie.setMaxAge(0);
+        cookie.setPath("/");
 
         response.addCookie(cookie);
         return "로그아웃 완료";

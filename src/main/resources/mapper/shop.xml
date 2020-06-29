@@ -210,7 +210,7 @@
             si, sp
         FROM
             shop_info AS si
-        INNER JOIN
+        LEFT OUTER JOIN
             shop_product AS sp ON si.sid = sp.sid
         where
             si.sid = ${sid}
