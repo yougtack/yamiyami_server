@@ -14,5 +14,5 @@ public interface CommentDao {
 
     List<CommentModel> showComments(@Param("sid") Integer sid);
 
-    List<CommentModel> myComments(@Param("userNo") Integer userNo);
+    List<CommentModel> myComments(@Param("userId") String userId);
 }

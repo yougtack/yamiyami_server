@@ -14,5 +14,5 @@ public interface CommentService {
 
     List<CommentModel> showComments(Integer sid);
 
-    List<CommentModel> myComments(Integer userNo);
+    List<CommentModel> myComments(String userId);
 }

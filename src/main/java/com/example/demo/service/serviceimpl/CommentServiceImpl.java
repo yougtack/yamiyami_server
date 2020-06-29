@@ -37,8 +37,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<CommentModel> myComments(Integer userNo){
-        return dao.myComments(userNo);
+    public List<CommentModel> myComments(String userId){
+        return dao.myComments(userId);
     }
 
 }

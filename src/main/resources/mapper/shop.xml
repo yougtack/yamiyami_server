@@ -123,8 +123,8 @@
 
     <select id="searchWord" resultType="com.example.demo.model.SearchWordModel">
         SELECt
-            si.name, si.tel, si.addr,
-            si.openTime, si.closeTime, (select SUM(good) from good where sid = ${sid}) AS total_good,
+            si.file, si.name, si.tel, si.addr,
+            si.openTime, si.closeTime, (select SUM(good) from good where sid = si.sid) AS total_good,
             sp.pname
         FROM
             shop_info AS si
@@ -161,7 +161,7 @@
         INSERT INTO
             shop_product(sid, pname, cost)
         VALUES
-         ((SELECT MAX(sid) from shop_info), #{pname}, ${cost});
+            ((SELECT MAX(sid) FROM shop_info), #{pname}, ${cost})
     </insert>
 
     <insert id="firstShopGood" parameterType="String">

@@ -78,13 +78,13 @@ public class CommentController {
     }
 
     //내가 쓴 댓글
-    @RequestMapping(value = "/myComment/{userNo}", method = RequestMethod.GET)
-    public List<CommentModel> myComment(@PathVariable Integer userNo, HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "/myComment/{userId}", method = RequestMethod.GET)
+    public List<CommentModel> myComment(@PathVariable String userId, HttpServletRequest request, HttpServletResponse response){
         String loginUserId = LoginUtil.getLoginUserId(request);
 
         List<CommentModel> myComment = null;
         if(loginUserId != null){
-           myComment = commentService.myComments(userNo);
+           myComment = commentService.myComments(userId);
         }
         else{
             response.setStatus(HttpStatus.UNAUTHORIZED.value());

@@ -50,6 +50,6 @@
         FROM
             shop_comments
         WHERE
-            userNo = #{userNo}
+            userId = #{userId}
     </select>
 </mapper>
