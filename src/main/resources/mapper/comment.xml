@@ -44,12 +44,14 @@
             cid
     </select>
 
-    <select id="myComments" resultType="com.example.demo.model.CommentModel">
+    <select id="myComments" resultType="com.example.demo.model.MyCommentModel">
         SELECT
-            cid, sid, userId, comment
+            si.name, si.sid, sc.cid, sc.userId, sc.comment
         FROM
-            shop_comments
-        WHERE
-            userId = #{userId}
+            shop_comments AS sc
+        JOIN
+            shop_info AS si WHERE sc.sid = si.sid
+        AND
+            sc.userId = #{userId}
     </select>
 </mapper>

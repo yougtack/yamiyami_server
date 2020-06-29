@@ -21,6 +21,6 @@ public class ShopInsertModel {
     private int categoryId;
     private String userId;
 
-    private String pname;
-    private Integer cost;
+    private String[] pname;
+    private Integer[] cost;
 }

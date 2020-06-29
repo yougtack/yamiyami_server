@@ -97,11 +97,12 @@ public class ShopController {
     @RequestMapping(value = "/shop", method = RequestMethod.POST)
     public Integer insertShop(@RequestBody ShopInsertModel shop, HttpServletRequest request, HttpServletResponse response){
         String loginUserId = LoginUtil.getLoginUserId(request);
-        System.out.println(shop.getPname()+" "+shop.getCost());
         Integer insertShop = null;
         if(loginUserId != null){
             shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId(), shop.getUserId());
-            insertShop = shopService.insertProduct(shop.getPname(), shop.getCost());
+            for(int i=0;i<shop.getPname().length;i++){
+                insertShop = shopService.insertProduct(shop.getPname()[i], shop.getCost()[i]);
+            }
         }
         else{
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
