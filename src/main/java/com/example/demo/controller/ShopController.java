@@ -110,6 +110,22 @@ public class ShopController {
         return insertShop;
     }
 
+    //가게안에서 상품추가
+    @RequestMapping(value = "/inShop", method = RequestMethod.POST)
+    public Integer insertInShop(@RequestBody insertInShopModel shop, HttpServletRequest request, HttpServletResponse response){
+        String loginUserId = LoginUtil.getLoginUserId(request);
+        Integer insertShop = null;
+        if(loginUserId != null){
+            for(int i=0;i<shop.getPname().length;i++){
+                insertShop = shopService.insertInShopProduct(shop.getSid(), shop.getPname()[i], shop.getCost()[i]);
+            }
+        }
+        else{
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        }
+        return insertShop;
+    }
+
     //내가쓴 맛집
     @RequestMapping(value = "/myShop", method = RequestMethod.GET)
     public List<ShopModel> myShop(HttpServletRequest request, HttpServletResponse response){

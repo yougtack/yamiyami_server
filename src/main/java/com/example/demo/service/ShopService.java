@@ -11,6 +11,9 @@ public interface ShopService {
     Integer insertShop (String name, String tel, String addr, String openTime, String closeTime, Integer categoryId, String userId);
 
     Integer insertProduct(String pname, Integer cost);
+
+    //가게안에서 상품추가
+    Integer insertInShopProduct(Integer sid, String pname, Integer cost);
     //음식 종류별
     List<ShopModel> category(Integer category);
 

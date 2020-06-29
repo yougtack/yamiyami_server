@@ -17,6 +17,8 @@ public interface ShopDao {
 
     Integer insertProduct(@Param("pname") String pname, @Param("cost") Integer cost);
 
+    Integer insertInShopProduct(@Param("sid") Integer sid, @Param("pname") String pname, @Param("cost") Integer cost);
+
     List<ShopModel> category(@Param("categoryId") Integer categoryId);
 
     List<GoodModel> getGoodList(@Param("sid") Integer sid);

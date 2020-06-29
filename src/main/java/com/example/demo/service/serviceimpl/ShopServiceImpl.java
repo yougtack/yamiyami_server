@@ -25,6 +25,12 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
+    public Integer insertInShopProduct(Integer sid, String pname, Integer cost){
+        return dao.insertInShopProduct(sid, pname, cost);
+    }
+
+
+    @Override
     public List<GoodModel> getGoodList(Integer sid){
         return dao.getGoodList(sid);
     }

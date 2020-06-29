@@ -164,6 +164,12 @@
             ((SELECT MAX(sid) FROM shop_info), #{pname}, ${cost})
     </insert>
 
+    <insert id="insertInShopProduct" parameterType="String">
+        INSERT INTO
+            shop_product(sid, pname, cost)
+        VALUES
+            (${sid}, #{pname}, #{cost})
+    </insert>
     <insert id="firstShopGood" parameterType="String">
         INSERT INTO
             good(sid, userId)
@@ -200,11 +206,13 @@
     </update>
 
     <delete id="deleteMyShop" parameterType="int">
-        DELETE FROM
-            shop_info
-        WHERE
-            sid = ${sid}
+        DELETE
+            si, sp
+        FROM
+            shop_info AS si
+        INNER JOIN
+            shop_product AS sp ON si.sid = sp.sid
+        where
+            si.sid = ${sid}
     </delete>
-
-
 </mapper>
