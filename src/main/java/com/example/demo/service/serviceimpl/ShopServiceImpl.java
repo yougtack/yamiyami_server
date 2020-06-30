@@ -6,13 +6,20 @@ import com.example.demo.model.ShopModel;
 import com.example.demo.service.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.List;
 
 @Service
+@Transactional(rollbackFor = Exception.class, noRollbackFor = RuntimeException.class)
 public class ShopServiceImpl implements ShopService {
     @Autowired
     private ShopDao dao;
+
+//    @Autowired
+//    @Qualifier("sqlSession")
+//    private SqlSessionTemplate sqlSession;
 
     @Override
     public Integer insertShop(String name, String tel, String addr, String openTime, String closeTime, Integer categoryId, String userId){
@@ -20,13 +27,38 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Integer insertProduct(String pname, Integer cost){
-        return dao.insertProduct(pname, cost);
+    public Integer insertProduct(String[] pname, Integer[] cost){
+        Integer result = 0;
+        Integer i = 0;
+        try{
+            for (String product:pname) {
+                result += dao.insertProduct(product, cost[i]);
+                ++i;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            i=0;
+        }
+        return result;
     }
 
     @Override
-    public Integer insertInShopProduct(Integer sid, String pname, Integer cost){
-        return dao.insertInShopProduct(sid, pname, cost);
+    public Integer insertInShopProduct(Integer sid, String[] pname, Integer[] cost){
+        Integer result = 0;
+        Integer i = 0;
+        System.out.println(TransactionSynchronizationManager.getCurrentTransactionName());
+        try{
+            for (String productName:pname) {
+                result +=  dao.insertInShopProduct(sid, productName, cost[i]);
+                ++i;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            i=0;
+        }
+        return result;
     }
 
 

@@ -4,8 +4,12 @@ import com.example.demo.model.*;
 import com.example.demo.service.CategoriesService;
 import com.example.demo.service.ShopService;
 import com.example.demo.util.LoginUtil;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +30,7 @@ public class ShopController {
     @RequestMapping(value ="/categories", method = RequestMethod.GET)
     public List<CategoriesModel> getList(){
         List<CategoriesModel> categoriesList = categoriesService.CategoriesList();
+
         return categoriesList;
     }
 
@@ -101,10 +106,7 @@ public class ShopController {
         Integer insertShop = null;
         if(loginUserId != null){
             shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId(), shop.getUserId());
-
-            for(int i=0;i<shop.getPname().length;i++){
-                insertShop = shopService.insertProduct(shop.getPname()[i], shop.getCost()[i]);
-            }
+            insertShop = shopService.insertProduct(shop.getPname(), shop.getCost());
         }
         else{
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -118,9 +120,7 @@ public class ShopController {
         String loginUserId = LoginUtil.getLoginUserId(request);
         Integer insertShop = null;
         if(loginUserId != null){
-            for(int i=0;i<shop.getPname().length;i++){
-                insertShop = shopService.insertInShopProduct(shop.getSid(), shop.getPname()[i], shop.getCost()[i]);
-            }
+            insertShop = shopService.insertInShopProduct(shop.getSid(), shop.getPname(), shop.getCost());
         }
         else{
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -171,4 +171,11 @@ public class ShopController {
         }
         return updateMyShop;
     }
+
+    @Transactional
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public void Test(){
+        System.out.println(TransactionSynchronizationManager.getCurrentTransactionName());
+    }
+
 }
