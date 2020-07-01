@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.model.CategoriesModel;
 import com.example.demo.model.GoodModel;
+import com.example.demo.model.ImageModel;
 import com.example.demo.model.ShopModel;
 import org.apache.ibatis.annotations.Param;
 
@@ -45,4 +46,6 @@ public interface ShopDao {
             @Param("openTime") String openTime, @Param("closeTime") String closeTime,
             @Param("categoryId") Integer categoryId
     );
+
+    ImageModel image();
 }

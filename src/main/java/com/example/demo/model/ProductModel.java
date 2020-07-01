@@ -8,5 +8,5 @@ import lombok.Setter;
 public class ProductModel {
     private String pfile;
     private String pname;
-    private Integer cost;
+    private String cost;
 }

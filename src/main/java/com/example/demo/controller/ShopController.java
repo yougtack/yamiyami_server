@@ -4,13 +4,12 @@ import com.example.demo.model.*;
 import com.example.demo.service.CategoriesService;
 import com.example.demo.service.ShopService;
 import com.example.demo.util.LoginUtil;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +33,7 @@ public class ShopController {
         return categoriesList;
     }
 
-    //카테고리 리스트 랭킹빼고 가져오
+    //카테고리 리스트 랭킹빼고 가져오기
     @RequestMapping(value ="/foodCategories", method = RequestMethod.GET)
     public List<CategoriesModel> getUnRankingList(){
         List<CategoriesModel> foodCategories = categoriesService.foodCategories();
@@ -172,10 +171,9 @@ public class ShopController {
         return updateMyShop;
     }
 
-    @Transactional
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public void Test(){
-        System.out.println(TransactionSynchronizationManager.getCurrentTransactionName());
+    public ImageModel Test(){
+        return shopService.image();
     }
 
 }

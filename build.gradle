@@ -43,6 +43,8 @@ dependencies {
     //JSON(JavaScript Object Notation)
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
 
+    //AOP
+    compile('org.springframework.boot:spring-boot-starter-aop')
 }
 
 test {

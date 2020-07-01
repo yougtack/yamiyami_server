@@ -219,4 +219,8 @@
 		WHERE
 			si.sid = ${sid}
     </delete>
+
+    <select id="image" resultType="com.example.demo.model.ImageModel">
+        select * from image123;
+    </select>
 </mapper>

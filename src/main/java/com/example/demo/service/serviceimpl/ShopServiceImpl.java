@@ -2,9 +2,12 @@ package com.example.demo.service.serviceimpl;
 
 import com.example.demo.dao.ShopDao;
 import com.example.demo.model.GoodModel;
+import com.example.demo.model.ImageModel;
 import com.example.demo.model.ShopModel;
 import com.example.demo.service.ShopService;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -12,21 +15,18 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import java.util.List;
 
 @Service
-@Transactional(rollbackFor = Exception.class, noRollbackFor = RuntimeException.class)
 public class ShopServiceImpl implements ShopService {
     @Autowired
     private ShopDao dao;
 
-//    @Autowired
-//    @Qualifier("sqlSession")
-//    private SqlSessionTemplate sqlSession;
-
     @Override
+    @Transactional
     public Integer insertShop(String name, String tel, String addr, String openTime, String closeTime, Integer categoryId, String userId){
         return dao.insertShop(name, tel, addr, openTime, closeTime, categoryId, userId);
     }
 
     @Override
+    @Transactional
     public Integer insertProduct(String[] pname, Integer[] cost){
         Integer result = 0;
         Integer i = 0;
@@ -44,6 +44,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
+    @Transactional
     public Integer insertInShopProduct(Integer sid, String[] pname, Integer[] cost){
         Integer result = 0;
         Integer i = 0;
@@ -115,5 +116,10 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public Integer updateMyShop(Integer sid, String name, String tel, String addr, String openTime, String closeTime, Integer categoryId){
         return dao.updateMyShop(sid, name, tel, addr, openTime, closeTime, categoryId);
+    }
+
+    @Override
+    public ImageModel image(){
+        return dao.image();
     }
 }
