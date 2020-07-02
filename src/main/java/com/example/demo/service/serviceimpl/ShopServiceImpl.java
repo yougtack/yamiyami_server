@@ -2,6 +2,7 @@ package com.example.demo.service.serviceimpl;
 
 import com.example.demo.dao.ShopDao;
 import com.example.demo.model.GoodModel;
+import com.example.demo.model.ImageModel;
 import com.example.demo.model.ShopModel;
 import com.example.demo.service.MemberService;
 import com.example.demo.service.ShopService;
@@ -125,4 +126,10 @@ public class ShopServiceImpl implements ShopService {
     public Integer image(String image){
         return dao.image(image);
     }
+
+    @Override
+    public ImageModel getImage(){
+        return dao.getImage();
+    }
+
 }

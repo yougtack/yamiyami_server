@@ -49,4 +49,6 @@ public interface ShopDao {
     );
 
     Integer image(@Param("image") String image);
+
+    ImageModel getImage();
 }

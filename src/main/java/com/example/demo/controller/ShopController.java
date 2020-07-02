@@ -172,10 +172,10 @@ public class ShopController {
         return updateMyShop;
     }
 
-//    @RequestMapping(value = "/test", method = RequestMethod.GET)
-//    public ImageModel Test(){
-//        return shopService.image();
-//    }
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public ImageModel Test(){
+        return shopService.getImage();
+    }
 
 //    @PostMapping("/uploadFile")
 //    @ResponseStatus(HttpStatus.CREATED)
@@ -185,25 +185,24 @@ public class ShopController {
 //            String originalfileName = file.getOriginalFilename();
 //            File dest = new File("/Users/kim-youngtack/desktop/mm/" + originalfileName);
 //            file.transferTo(dest);
-//            // TODO
 //        }
 //        return list;
 //    }
 
-    @PostMapping("/test")
-    @ResponseBody
-    public String upload(@RequestPart MultipartFile img) throws IOException {
-        String imgName = img.getOriginalFilename();
-        ImageModel image = new ImageModel();
-        image.setImage(imgName);
-        String imageName = image.getImage();
-        System.out.println(imageName);
-        shopService.image(imageName);
-        File upl = new File("https://drive.google.com/drive/folders/1gUdToBrkGYR3eSlHWATemX4hSGWCFBjc/" + imgName);
-        upl.createNewFile();
-        FileOutputStream fout = new FileOutputStream(upl);
-        fout.write(img.getBytes());
-        fout.close();
-        return "ok";
-    }
+//    @PostMapping("/test")
+//    @ResponseBody
+//    public String upload(@RequestPart MultipartFile img) throws IOException {
+//        String imgName = img.getOriginalFilename();
+//        ImageModel image = new ImageModel();
+//        image.setImage(imgName);
+//        String imageName = image.getImage();
+//        System.out.println(imageName);
+//        shopService.image(imageName);
+//        File upl = new File("https://drive.google.com/drive/folders/1gUdToBrkGYR3eSlHWATemX4hSGWCFBjc/" + imgName);
+//        upl.createNewFile();
+//        FileOutputStream fout = new FileOutputStream(upl);
+//        fout.write(img.getBytes());
+//        fout.close();
+//        return "ok";
+//    }
 }

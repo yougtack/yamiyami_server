@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.GoodModel;
+import com.example.demo.model.ImageModel;
 import com.example.demo.model.ShopModel;
 
 import java.util.List;
@@ -48,4 +49,7 @@ public interface ShopService {
     Integer updateMyShop(Integer sid, String name, String tel, String addr, String openTime, String closeTime, Integer categoryId);
 
     Integer image(String image);
+
+    ImageModel getImage();
+
 }

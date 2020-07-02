@@ -170,6 +170,12 @@
             sid
     </select>
 
+    <select id="getImage" resultType="com.example.demo.model.ImageModel">
+        select
+            PicNum, image
+        from
+            image
+    </select>
     <insert id="insertShop" parameterType="com.example.demo.model.ShopInsertModel">
         INSERT INTO
             shop_info(name, tel, addr, openTime, closeTime, categoryId, userId)
