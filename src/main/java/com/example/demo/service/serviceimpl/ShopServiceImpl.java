@@ -2,12 +2,10 @@ package com.example.demo.service.serviceimpl;
 
 import com.example.demo.dao.ShopDao;
 import com.example.demo.model.GoodModel;
-import com.example.demo.model.ImageModel;
 import com.example.demo.model.ShopModel;
+import com.example.demo.service.MemberService;
 import com.example.demo.service.ShopService;
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -19,9 +17,14 @@ public class ShopServiceImpl implements ShopService {
     @Autowired
     private ShopDao dao;
 
+    @Autowired
+    MemberService memberService;
+
     @Override
     @Transactional
     public Integer insertShop(String name, String tel, String addr, String openTime, String closeTime, Integer categoryId, String userId){
+//        System.out.println("in shopService: "+TransactionSynchronizationManager.getCurrentTransactionName());
+//        memberService.testTransaction();
         return dao.insertShop(name, tel, addr, openTime, closeTime, categoryId, userId);
     }
 
@@ -119,7 +122,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public ImageModel image(){
-        return dao.image();
+    public Integer image(String image){
+        return dao.image(image);
     }
 }

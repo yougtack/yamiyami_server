@@ -6,13 +6,14 @@ import com.example.demo.service.ShopService;
 import com.example.demo.util.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 
@@ -171,9 +172,38 @@ public class ShopController {
         return updateMyShop;
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public ImageModel Test(){
-        return shopService.image();
-    }
+//    @RequestMapping(value = "/test", method = RequestMethod.GET)
+//    public ImageModel Test(){
+//        return shopService.image();
+//    }
 
+//    @PostMapping("/uploadFile")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public List<String> upload(@RequestPart List<MultipartFile> files) throws Exception {
+//        List<String> list = new ArrayList<>();
+//        for (MultipartFile file : files) {
+//            String originalfileName = file.getOriginalFilename();
+//            File dest = new File("/Users/kim-youngtack/desktop/mm/" + originalfileName);
+//            file.transferTo(dest);
+//            // TODO
+//        }
+//        return list;
+//    }
+
+    @PostMapping("/test")
+    @ResponseBody
+    public String upload(@RequestPart MultipartFile img) throws IOException {
+        String imgName = img.getOriginalFilename();
+        ImageModel image = new ImageModel();
+        image.setImage(imgName);
+        String imageName = image.getImage();
+        System.out.println(imageName);
+        shopService.image(imageName);
+        File upl = new File("https://drive.google.com/drive/folders/1gUdToBrkGYR3eSlHWATemX4hSGWCFBjc/" + imgName);
+        upl.createNewFile();
+        FileOutputStream fout = new FileOutputStream(upl);
+        fout.write(img.getBytes());
+        fout.close();
+        return "ok";
+    }
 }

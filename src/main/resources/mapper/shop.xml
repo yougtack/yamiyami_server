@@ -24,7 +24,25 @@
         </collection>
     </resultMap>
 
-<!--    <resultMap id="categoryResultMap" type="com.example.demo.model.ShopCategoryModel">-->
+    <resultMap id="searchWordResultMap" type="com.example.demo.model.SearchWordModel">
+        <id property="sid" column="sid" />
+        <result property="file" column="file"/>
+        <result property="name" column="name"/>
+        <result property="tel" column="tel"/>
+        <result property="addr" column="addr"/>
+        <result property="openTime" column="openTime"/>
+        <result property="closeTime" column="closeTime"/>
+        <result property="total_good" column="total_good"/>
+
+        <collection property="products" ofType="com.example.demo.model.ProductModel">
+            <result property="pfile" column="pfile"/>
+            <result property="pname" column="pname"/>
+            <result property="cost" column="cost"/>
+        </collection>
+    </resultMap>
+
+
+    <!--    <resultMap id="categoryResultMap" type="com.example.demo.model.ShopCategoryModel">-->
 <!--        <id property="sid" column="sid" />-->
 <!--        <result property="file" column="file"/>-->
 <!--        <result property="name" column="name"/>-->
@@ -121,13 +139,13 @@
             sid = ${sid} AND userId = #{userId}
     </select>
 
-    <select id="searchWord" resultType="com.example.demo.model.SearchWordModel">
+    <select id="searchWord" resultMap="searchWordResultMap">
         SELECt
             si.sid, si.file, si.name, si.tel, si.addr,
             date_format(si.openTime,'%H:%i') as openTime,
             date_format(si.closeTime,'%H:%i') as closeTime,
             (select SUM(good) from good where sid = si.sid) AS total_good,
-            sp.pname
+            sp.pfile, sp.pname, sp.cost
         FROM
             shop_info AS si
         LEFT OUTER JOIN
@@ -172,11 +190,19 @@
         VALUES
             (${sid}, #{productName}, #{cost})
     </insert>
+
     <insert id="firstShopGood" parameterType="String">
         INSERT INTO
             good(sid, userId)
         VALUES
             (${sid}, #{userId})
+    </insert>
+
+    <insert id="image" parameterType="com.example.demo.model.ImageModel">
+        INSERT INTO
+            image(image)
+        VALUES
+            (#{image})
     </insert>
 
     <update id="updateMyShop" parameterType="String">
@@ -219,8 +245,4 @@
 		WHERE
 			si.sid = ${sid}
     </delete>
-
-    <select id="image" resultType="com.example.demo.model.ImageModel">
-        select * from image123;
-    </select>
 </mapper>

@@ -45,5 +45,4 @@ public class AopConfig {
     public void doSomethingAfterReturning() {
         logger.info("AOP Test : AfterReturning ");
     }
-
 }

@@ -7,4 +7,6 @@ public interface MemberService {
     int insertMember(String userId, String userPw);
 
     MemberModel login(String userId, String userPw);
+
+    void testTransaction();
 }

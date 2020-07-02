@@ -3,6 +3,8 @@ package com.example.demo.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class SearchWordModel {
@@ -14,4 +16,6 @@ public class SearchWordModel {
     private String openTime;
     private String closeTime;
     private Integer total_good = 0;
+
+    private List<ProductModel> products;
 }

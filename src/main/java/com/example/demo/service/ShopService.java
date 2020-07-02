@@ -1,8 +1,6 @@
 package com.example.demo.service;
 
 import com.example.demo.model.GoodModel;
-import com.example.demo.model.ImageModel;
-import com.example.demo.model.ShopInsertModel;
 import com.example.demo.model.ShopModel;
 
 import java.util.List;
@@ -49,6 +47,5 @@ public interface ShopService {
     //내가 입력한 가게 수정하기
     Integer updateMyShop(Integer sid, String name, String tel, String addr, String openTime, String closeTime, Integer categoryId);
 
-    ImageModel image();
-
+    Integer image(String image);
 }
