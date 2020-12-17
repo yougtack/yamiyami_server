@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0942f0d3-50f5-4982-9ade-4978662a9a72" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/ApptestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/ApptestApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/config/AopConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/config/WebMvcContextConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/AopController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/ShopController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/ShopController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/interceptor/LoginInterceptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/serviceimpl/ShopServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/serviceimpl/ShopServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/util/LoginUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/util/LoginUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +146,8 @@
       <workItem from="1608010150592" duration="20435000" />
       <workItem from="1608103394254" duration="141000" />
       <workItem from="1608184314661" duration="98000" />
-      <workItem from="1608184963046" duration="2144000" />
+      <workItem from="1608184963046" duration="2825000" />
+      <workItem from="1608247717681" duration="40000" />
     </task>
     <task id="LOCAL-00001" summary="api추가&#10;MemberController안에 로그인, 로그아웃, 회원가입 추가했음">
       <created>1592452276945</created>
@@ -390,7 +380,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593670952809</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="...">
+      <created>1608196989664</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1608196989664</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,7 +395,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="catrgories추가, 맛집추가, 댓글 입력, 댓글 삭제 api구성함." />
     <MESSAGE value="my맛집 구성&#10;내가쓴 쓴 후기&#10;내가 작성한 맛집 수정, 삭제, 검색 할 수있게하는 api구성" />
     <MESSAGE value="뭐바궜을까" />
     <MESSAGE value="vue제거" />
@@ -423,9 +419,14 @@
     <MESSAGE value="이미지 api구현중" />
     <MESSAGE value="단어검색 출력형태에 products추가" />
     <MESSAGE value="이미지 get추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="이미지 get추가" />
+    <MESSAGE value="..." />
+    <option name="LAST_COMMIT_MESSAGE" value="..." />
   </component>
   <component name="WindowStateProjectService">
+    <state x="257" y="22" key="CommitChangelistDialog2" timestamp="1608196989445">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="257" y="22" key="CommitChangelistDialog2/0.0.1440.900/1440.0.1920.1080@0.0.1440.900" timestamp="1608196989445" />
     <state width="1398" height="279" key="GridCell.Tab.0.bottom" timestamp="1608103250036">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
