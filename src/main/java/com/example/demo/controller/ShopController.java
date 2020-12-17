@@ -7,13 +7,9 @@ import com.example.demo.util.LoginUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 
@@ -30,7 +26,6 @@ public class ShopController {
     @RequestMapping(value ="/categories", method = RequestMethod.GET)
     public List<CategoriesModel> getList(){
         List<CategoriesModel> categoriesList = categoriesService.CategoriesList();
-
         return categoriesList;
     }
 
@@ -102,11 +97,12 @@ public class ShopController {
     @RequestMapping(value = "/shop", method = RequestMethod.POST)
     public Integer insertShop(@RequestBody ShopInsertModel shop, HttpServletRequest request, HttpServletResponse response){
         String loginUserId = LoginUtil.getLoginUserId(request);
-
-        Integer insertShop = null;
+        Integer insertShop = 0;
         if(loginUserId != null){
-            shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId(), shop.getUserId());
-            insertShop = shopService.insertProduct(shop.getPname(), shop.getCost());
+            insertShop += shopService.insertShop(shop.getName(), shop.getTel(), shop.getAddr(),
+                    shop.getOpenTime(), shop.getCloseTime(),
+                    shop.getCategoryId(), shop.getUserId());
+            insertShop += shopService.insertProduct(shop.getPname(), shop.getCost());
         }
         else{
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -148,7 +144,7 @@ public class ShopController {
     public Integer deleteMyShop(@PathVariable("sid") Integer sid, HttpServletRequest request, HttpServletResponse response){
         String loginUserId = LoginUtil.getLoginUserId(request); //로그인이 되었는지 안되었는지 확인.. 로그인 되면 string 형태로 loginUserId에 들어감
 
-        Integer deleteMyShop = null;
+        Integer deleteMyShop = 0;
         if(loginUserId != null){
             deleteMyShop = shopService.deleteMyShop(sid);
         }else{
@@ -162,9 +158,11 @@ public class ShopController {
     public Integer updateMyShop(@RequestBody ShopModel shop, HttpServletRequest request, HttpServletResponse response){
         String loginUserId = LoginUtil.getLoginUserId(request);
 
-        Integer updateMyShop = null;
+        Integer updateMyShop = 0;
         if(loginUserId != null){
-            updateMyShop = shopService.updateMyShop(shop.getSid(), shop.getName(), shop.getTel(), shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(), shop.getCategoryId());
+            updateMyShop = shopService.updateMyShop(shop.getSid(), shop.getName(), shop.getTel(),
+                                                    shop.getAddr(), shop.getOpenTime(), shop.getCloseTime(),
+                                                    shop.getCategoryId());
         }
         else{
             response.setStatus(HttpStatus.UNAUTHORIZED.value());

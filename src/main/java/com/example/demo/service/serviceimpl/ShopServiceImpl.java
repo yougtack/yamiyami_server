@@ -24,8 +24,6 @@ public class ShopServiceImpl implements ShopService {
     @Override
     @Transactional
     public Integer insertShop(String name, String tel, String addr, String openTime, String closeTime, Integer categoryId, String userId){
-//        System.out.println("in shopService: "+TransactionSynchronizationManager.getCurrentTransactionName());
-//        memberService.testTransaction();
         return dao.insertShop(name, tel, addr, openTime, closeTime, categoryId, userId);
     }
 
@@ -41,10 +39,9 @@ public class ShopServiceImpl implements ShopService {
             }
         }catch(Exception e){
             e.printStackTrace();
-        }finally {
-            i=0;
+        }finally{
+            return result;
         }
-        return result;
     }
 
     @Override
@@ -118,7 +115,9 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Integer updateMyShop(Integer sid, String name, String tel, String addr, String openTime, String closeTime, Integer categoryId){
+    public Integer updateMyShop(Integer sid, String name, String tel, String addr,
+                                String openTime, String closeTime, Integer categoryId){
+
         return dao.updateMyShop(sid, name, tel, addr, openTime, closeTime, categoryId);
     }
 

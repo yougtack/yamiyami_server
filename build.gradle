@@ -1,6 +1,6 @@
 plugins {
-    id 'org.springframework.boot' version '2.3.0.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'org.springframework.boot' version '2.3.3.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
 }
 
@@ -17,6 +17,8 @@ configurations {
 repositories {
     mavenCentral()
 }
+
+
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -42,9 +44,6 @@ dependencies {
 
     //JSON(JavaScript Object Notation)
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
-
-    //AOP
-    compile('org.springframework.boot:spring-boot-starter-aop')
 }
 
 test {
